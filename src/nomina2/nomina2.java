@@ -1,4 +1,7 @@
 package nomina2;
+/*
+*Ricardo Perez 1255
+*/
 public class nomina2 extends javax.swing.JFrame {
         /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
     *vectores nombre y apelido usados para generas nombres random, y el salario para obtenerlo random
