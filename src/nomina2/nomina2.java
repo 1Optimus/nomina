@@ -266,7 +266,7 @@ public class nomina2 extends javax.swing.JFrame {
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         // solo limpiamos los vectores y mostramos
         for(int i=0;i<=9;i++){
-            for(int j=0;j<=6;j++){
+            for(int j=0;j<=9;j++){
                 matPrincipal[i][j]="";
             }
         }
@@ -275,8 +275,8 @@ public class nomina2 extends javax.swing.JFrame {
         }
         tbprincipal.setModel(new javax.swing.table.DefaultTableModel(
             matPrincipal,
-            new String [] {
-                "No.", "Nombre empleado", "Salario base", "Total deduciones", "Total perceptible", "Sueldo liquido", "Departamento"
+             new String [] {
+                "No.", "Nombre empleado", "Sueldo", "IGSS", "Bonificacion", "Comision", "ISR", "Desc Judicial", "Sueldo liquido", "Departamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
