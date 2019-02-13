@@ -6,6 +6,7 @@ public class nomina2 extends javax.swing.JFrame {
         /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
     *vectores nombre y apelido usados para generas nombres random, y el salario para obtenerlo random
     *el vector total es para el total de los departamentos
+    *y tambien se le declaran los datos 
     */
       String [][] matPrincipal= new String[10][10];
     String [] vectNombre= new String[10];
