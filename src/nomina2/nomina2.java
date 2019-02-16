@@ -8,11 +8,11 @@ public class nomina2 extends javax.swing.JFrame {
     *el vector total es para el total de los departamentos
     *y tambien se le declaran los datos 
     */
-      String [][] matPrincipal= new String[10][10];
+    String [][] matPrincipal= new String[10][10];
     String [] vectNombre= new String[10];
     String [] vectApellido= new String[10];
-    int [] vectSalario= new int[5];
-    int [] vectTotal= new int[6];
+    float [] vectSalario= new float[5];
+    float [] vectTotal= new float[6];
     public nomina2() {
         initComponents();
          //declaracion de todos los posibles nombres a mostrar por random, en el boton random
@@ -158,7 +158,8 @@ public class nomina2 extends javax.swing.JFrame {
 
     private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
         // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
-        int rmdNombre,rmdApellido,rmdSalario,rmdBoni,rmdDepto, rmdComi,rmdJudi,rmdIgss;
+        int rmdNombre,rmdApellido,rmdSalario,rmdBoni,rmdDepto, rmdComi,rmdJudi;
+        float rmdIgss;
         for(int i=0;i<=9;i++){
             //numero random para el llenado de la tabla, tambien esta salario y el departamento al que pertenece
             rmdNombre=(int)(Math.random()*9);
@@ -167,16 +168,16 @@ public class nomina2 extends javax.swing.JFrame {
             matPrincipal[i][0]="#"+(i+1);
             rmdSalario=(int)(Math.random()*4);
             matPrincipal[i][2]=String.valueOf(vectSalario[rmdSalario]);
-            rmdIgss=(int)(Integer.parseInt(matPrincipal[i][2])*0.12);
-            matPrincipal[i][3]=String.valueOf((int)rmdIgss);
+            rmdIgss=(float)(Float.parseFloat(matPrincipal[i][2])*0.12);
+            matPrincipal[i][3]=String.valueOf(rmdIgss);
             rmdBoni=200+(int)(Math.random()*300);
-            matPrincipal[i][4]=String.valueOf((int)rmdBoni);
+            matPrincipal[i][4]=String.valueOf(rmdBoni);
            rmdComi=1+(int)(Math.random()*300);
-            matPrincipal[i][5]=String.valueOf((int)rmdComi);
+            matPrincipal[i][5]=String.valueOf(rmdComi);
             rmdJudi=1+(int)(Math.random()*400);
-            matPrincipal[i][7]=String.valueOf((int)rmdJudi);            
+            matPrincipal[i][7]=String.valueOf(rmdJudi);            
             rmdDepto=1+(int)(Math.random()*5);
-            matPrincipal[i][9]=String.valueOf((int)rmdDepto);
+            matPrincipal[i][9]=String.valueOf(rmdDepto);
         }
         //codigo utilizado para mostrar los datos en la tabla
           tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -198,34 +199,35 @@ public class nomina2 extends javax.swing.JFrame {
 
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
         //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
-        int itSal;
-    int itImp,itTotal;
+        //dependiendo del salario que gana al anio se le saca el porcentaje de isr
+        float itSal;
+    float itImp,itTotal;
           for(int i=0;i<=9;i++){
-          itSal=Integer.parseInt(matPrincipal[i][2])*12;
+          itSal=Float.parseFloat(matPrincipal[i][2])*12;
           if(itSal>30000){
-              itImp=(int)(itSal*0.07)/12;
+              itImp=(float)(itSal*0.07)/12;
           }else{
-          itImp=(int)(itSal*0.05)/12;
+          itImp=(float)(itSal*0.05)/12;
           }
           matPrincipal[i][6]=String.valueOf(itImp);
           }
         for(int i=0;i<=9;i++){
-            itTotal=(Integer.parseInt(matPrincipal[i][2]))-(Integer.parseInt(matPrincipal[i][3]))+(Integer.parseInt(matPrincipal[i][4]))+(Integer.parseInt(matPrincipal[i][5]))-(Integer.parseInt(matPrincipal[i][6]))-(Integer.parseInt(matPrincipal[i][7]));
+            itTotal=(Float.parseFloat(matPrincipal[i][2]))-(Float.parseFloat(matPrincipal[i][3]))+(Float.parseFloat(matPrincipal[i][4]))+(Float.parseFloat(matPrincipal[i][5]))-(Float.parseFloat(matPrincipal[i][6]))-(Float.parseFloat(matPrincipal[i][7]));
             matPrincipal[i][8]=String.valueOf(itTotal);
             if(Integer.parseInt(matPrincipal[i][9])==1){
-                vectTotal[1]=Integer.parseInt(matPrincipal[i][8])+vectTotal[1];
+                vectTotal[1]=Float.parseFloat(matPrincipal[i][8])+vectTotal[1];
             }
             if(Integer.parseInt(matPrincipal[i][9])==2){
-                vectTotal[2]=Integer.parseInt(matPrincipal[i][8])+vectTotal[2];
+                vectTotal[2]=Float.parseFloat(matPrincipal[i][8])+vectTotal[2];
             }
             if(Integer.parseInt(matPrincipal[i][9])==3){
-                vectTotal[3]=Integer.parseInt(matPrincipal[i][8])+vectTotal[3];
+                vectTotal[3]=Float.parseFloat(matPrincipal[i][8])+vectTotal[3];
             }
             if(Integer.parseInt(matPrincipal[i][9])==4){
-                vectTotal[4]=Integer.parseInt(matPrincipal[i][8])+vectTotal[4];
+                vectTotal[4]=Float.parseFloat(matPrincipal[i][8])+vectTotal[4];
             }
             if(Integer.parseInt(matPrincipal[i][9])==5){
-                vectTotal[5]=Integer.parseInt(matPrincipal[i][8])+vectTotal[5];
+                vectTotal[5]=Float.parseFloat(matPrincipal[i][8])+vectTotal[5];
             }
         }
         //codigo utilizado para mostrar los datos en la tabla
