@@ -1,4 +1,7 @@
 package nomina2;
+
+import javax.swing.JOptionPane;
+
 /*
 *Ricardo Perez 1255
 */
@@ -11,8 +14,8 @@ public class nomina2 extends javax.swing.JFrame {
     String [][] matPrincipal= new String[10][10];
     String [] vectNombre= new String[10];
     String [] vectApellido= new String[10];
-    float [] vectSalario= new float[5];
-    float [] vectTotal= new float[6];
+    double [] vectSalario= new double[5];
+    double [] vectTotal= new double[6];
     public nomina2() {
         initComponents();
          //declaracion de todos los posibles nombres a mostrar por random, en el boton random
@@ -155,31 +158,9 @@ public class nomina2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
-        // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
-        int rmdNombre,rmdApellido,rmdSalario,rmdBoni,rmdDepto, rmdComi,rmdJudi;
-        float rmdIgss;
-        for(int i=0;i<=9;i++){
-            //numero random para el llenado de la tabla, tambien esta salario y el departamento al que pertenece
-            rmdNombre=(int)(Math.random()*9);
-            rmdApellido=(int)(Math.random()*9);
-            matPrincipal[i][1]=vectNombre[rmdNombre]+" "+vectApellido[rmdApellido];
-            matPrincipal[i][0]="#"+(i+1);
-            rmdSalario=(int)(Math.random()*4);
-            matPrincipal[i][2]=String.valueOf(vectSalario[rmdSalario]);
-            rmdIgss=(float)(Float.parseFloat(matPrincipal[i][2])*0.12);
-            matPrincipal[i][3]=String.valueOf(rmdIgss);
-            rmdBoni=200+(int)(Math.random()*300);
-            matPrincipal[i][4]=String.valueOf(rmdBoni);
-           rmdComi=1+(int)(Math.random()*300);
-            matPrincipal[i][5]=String.valueOf(rmdComi);
-            rmdJudi=1+(int)(Math.random()*400);
-            matPrincipal[i][7]=String.valueOf(rmdJudi);            
-            rmdDepto=1+(int)(Math.random()*5);
-            matPrincipal[i][9]=String.valueOf(rmdDepto);
-        }
-        //codigo utilizado para mostrar los datos en la tabla
+    
+    public void mostrarentabla(){
+         //codigo utilizado para mostrar los datos en la tabla
           tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         tbprincipal.setModel(new javax.swing.table.DefaultTableModel(
             matPrincipal,
@@ -195,58 +176,7 @@ public class nomina2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-    }//GEN-LAST:event_btnrandomActionPerformed
-
-    private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
-        //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
-        //dependiendo del salario que gana al anio se le saca el porcentaje de isr
-        float itSal;
-    float itImp,itTotal;
-          for(int i=0;i<=9;i++){
-          itSal=Float.parseFloat(matPrincipal[i][2])*12;
-          if(itSal>30000){
-              itImp=(float)(itSal*0.07)/12;
-          }else{
-          itImp=(float)(itSal*0.05)/12;
-          }
-          matPrincipal[i][6]=String.valueOf(itImp);
-          }
-        for(int i=0;i<=9;i++){
-            itTotal=(Float.parseFloat(matPrincipal[i][2]))-(Float.parseFloat(matPrincipal[i][3]))+(Float.parseFloat(matPrincipal[i][4]))+(Float.parseFloat(matPrincipal[i][5]))-(Float.parseFloat(matPrincipal[i][6]))-(Float.parseFloat(matPrincipal[i][7]));
-            matPrincipal[i][8]=String.valueOf(itTotal);
-            if(Integer.parseInt(matPrincipal[i][9])==1){
-                vectTotal[1]=Float.parseFloat(matPrincipal[i][8])+vectTotal[1];
-            }
-            if(Integer.parseInt(matPrincipal[i][9])==2){
-                vectTotal[2]=Float.parseFloat(matPrincipal[i][8])+vectTotal[2];
-            }
-            if(Integer.parseInt(matPrincipal[i][9])==3){
-                vectTotal[3]=Float.parseFloat(matPrincipal[i][8])+vectTotal[3];
-            }
-            if(Integer.parseInt(matPrincipal[i][9])==4){
-                vectTotal[4]=Float.parseFloat(matPrincipal[i][8])+vectTotal[4];
-            }
-            if(Integer.parseInt(matPrincipal[i][9])==5){
-                vectTotal[5]=Float.parseFloat(matPrincipal[i][8])+vectTotal[5];
-            }
-        }
-        //codigo utilizado para mostrar los datos en la tabla
-           tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        tbprincipal.setModel(new javax.swing.table.DefaultTableModel(
-            matPrincipal,
-            new String [] {
-                "No.", "Nombre empleado", "Sueldo", "IGSS", "Bonificacion", "Comision", "ISR", "Desc Judicial", "Sueldo liquido", "Departamento"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        //codigo utilizado para mostrar el vector de totales por departamentos
+          //codigo utilizado para mostrar el vector de totales por departamentos
         tbtotal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {vectTotal[1]},
@@ -267,10 +197,15 @@ public class nomina2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-    }//GEN-LAST:event_btncalcularActionPerformed
-
-    private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
-        // solo limpiamos los vectores y mostramos
+}
+    public int numerorandom(int n1,int n2){
+        //se optienen dos valores para retornar el random
+        int rmd;
+        rmd=n1+(int)(Math.random()*n2);
+        return rmd;
+    }
+    public void limpiar(){
+         // solo limpiamos los vectores y mostramos
         for(int i=0;i<=9;i++){
             for(int j=0;j<=9;j++){
                 matPrincipal[i][j]="";
@@ -278,42 +213,83 @@ public class nomina2 extends javax.swing.JFrame {
         }
         for(int i=0;i<=5;i++){
             vectTotal[i]=0;
+        }       
+        mostrarentabla();
+    }
+    private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
+        // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
+       limpiar();
+        int rmd,rmd2;
+        double rmdIgss;
+        for(int i=0;i<=9;i++){
+            //numero random para el llenado de la tabla, tambien esta salario y el departamento al que pertenece
+            rmd=numerorandom(0,9);
+            rmd2=numerorandom(0,9);
+            matPrincipal[i][1]=vectNombre[rmd]+" "+vectApellido[rmd2];
+            matPrincipal[i][0]="#"+(i+1);
+            rmd=numerorandom(0,4);
+            matPrincipal[i][2]=String.valueOf(vectSalario[rmd]);
+            rmdIgss=(Double.parseDouble(matPrincipal[i][2])*0.12);
+            matPrincipal[i][3]=String.valueOf(rmdIgss);
+            rmd=numerorandom(200,300);
+            matPrincipal[i][4]=String.valueOf(rmd);
+            rmd=numerorandom(1,300);
+            matPrincipal[i][5]=String.valueOf(rmd);             
+            rmd=numerorandom(1,5);
+            matPrincipal[i][9]=String.valueOf(rmd);
+        }       
+         mostrarentabla();
+    }//GEN-LAST:event_btnrandomActionPerformed
+
+    private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
+        //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
+        //dependiendo del salario que gana al anio se le saca el porcentaje de isr
+        double itSal;
+        String datoJudi;
+        double itImp,itTotal;
+        //codigo para calcular el isr
+          for(int i=0;i<=9;i++){
+          itSal=Double.parseDouble(matPrincipal[i][2])*12;
+          if(itSal>30000){
+              itImp=(itSal*0.07)/12;
+          }else{
+          itImp=(itSal*0.05)/12;
+          }
+          matPrincipal[i][6]=String.valueOf(itImp);
+          }
+          //codigo para introducir lo que es el descuento judicial
+          for (int i=0;i<=9;i++){
+          datoJudi=JOptionPane.showInputDialog("Ingrese la cantidad a descontar de descuento judicial de: "+matPrincipal[i][1]);          
+          if(datoJudi==""){
+              matPrincipal[i][7]="0";
+          }else{matPrincipal[i][7]=datoJudi;}
+          }
+          //codigo para hacer las sumas de los totales y del vector de totales por departamento
+        for(int i=0;i<=9;i++){
+            itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
+            matPrincipal[i][8]=String.valueOf(itTotal);
+            if(Integer.parseInt(matPrincipal[i][9])==1){
+                vectTotal[1]=Double.parseDouble(matPrincipal[i][8])+vectTotal[1];
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==2){
+                vectTotal[2]=Double.parseDouble(matPrincipal[i][8])+vectTotal[2];
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==3){
+                vectTotal[3]=Double.parseDouble(matPrincipal[i][8])+vectTotal[3];
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==4){
+                vectTotal[4]=Double.parseDouble(matPrincipal[i][8])+vectTotal[4];
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==5){
+                vectTotal[5]=Double.parseDouble(matPrincipal[i][8])+vectTotal[5];
+            }
         }
-        tbprincipal.setModel(new javax.swing.table.DefaultTableModel(
-            matPrincipal,
-             new String [] {
-                "No.", "Nombre empleado", "Sueldo", "IGSS", "Bonificacion", "Comision", "ISR", "Desc Judicial", "Sueldo liquido", "Departamento"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
+      mostrarentabla();
+    }//GEN-LAST:event_btncalcularActionPerformed
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        //codigo utilizado para mostrar el vector de totales por departamentos
-        tbtotal.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {vectTotal[1]},
-                {vectTotal[2]},
-                {vectTotal[3]},
-                {vectTotal[4]},
-                {vectTotal[5]}
-            },
-            new String [] {
-                "Cantidad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+    private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
+       //se llama al metodo de limpiar tablas, lo cual borra las matrices y limpa la tabla
+        limpiar();
     }//GEN-LAST:event_btnlimpiarActionPerformed
 
     /**
