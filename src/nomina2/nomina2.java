@@ -237,6 +237,8 @@ public class nomina2 extends javax.swing.JFrame {
             matPrincipal[i][5]=String.valueOf(rmd);             
             rmd=numerorandom(1,5);
             matPrincipal[i][9]=String.valueOf(rmd);
+            rmd=numerorandom(200,1000);
+            matPrincipal[i][7]=String.valueOf(rmd);  
         }       
          mostrarentabla();
     }//GEN-LAST:event_btnrandomActionPerformed
@@ -259,11 +261,9 @@ public class nomina2 extends javax.swing.JFrame {
           }
           //codigo para introducir lo que es el descuento igss
           for (int i=0;i<=9;i++){
-          datoIg=JOptionPane.showInputDialog("Ingrese 1 si desea permetir iggs a: "+matPrincipal[i][1]+" o ingrese 2 para no");          
-          if("2".equals(datoIg)){
-             JOptionPane.showMessageDialog(null,"se pudo");
-              matPrincipal[i][3]="0.0";
-          }else{
+          datoIg=JOptionPane.showInputDialog("Ingrese 1 si desea permetir IGSS a: "+matPrincipal[i][1]+" o ingrese 2 para no");          
+          if("2".equals(datoIg)){             
+              matPrincipal[i][3]="0";
           }
           }
           //codigo para hacer las sumas de los totales y del vector de totales por departamento
