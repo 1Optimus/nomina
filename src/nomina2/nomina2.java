@@ -245,7 +245,7 @@ public class nomina2 extends javax.swing.JFrame {
         //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
         //dependiendo del salario que gana al anio se le saca el porcentaje de isr
         double itSal;
-        String datoJudi;
+        String datoIg;
         double itImp,itTotal;
         //codigo para calcular el isr
           for(int i=0;i<=9;i++){
@@ -257,12 +257,14 @@ public class nomina2 extends javax.swing.JFrame {
           }
           matPrincipal[i][6]=String.valueOf(itImp);
           }
-          //codigo para introducir lo que es el descuento judicial
+          //codigo para introducir lo que es el descuento igss
           for (int i=0;i<=9;i++){
-          datoJudi=JOptionPane.showInputDialog("Ingrese la cantidad a descontar de descuento judicial de: "+matPrincipal[i][1]);          
-          if(datoJudi==""){
-              matPrincipal[i][7]="0";
-          }else{matPrincipal[i][7]=datoJudi;}
+          datoIg=JOptionPane.showInputDialog("Ingrese 1 si desea permetir iggs a: "+matPrincipal[i][1]+" o ingrese 2 para no");          
+          if("2".equals(datoIg)){
+             JOptionPane.showMessageDialog(null,"se pudo");
+              matPrincipal[i][3]="0.0";
+          }else{
+          }
           }
           //codigo para hacer las sumas de los totales y del vector de totales por departamento
         for(int i=0;i<=9;i++){
