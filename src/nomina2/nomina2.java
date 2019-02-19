@@ -1,7 +1,6 @@
 package nomina2;
 
 import javax.swing.JOptionPane;
-
 /*
 *Ricardo Perez 1255
 */
@@ -18,7 +17,7 @@ public class nomina2 extends javax.swing.JFrame {
     double [] vectTotal= new double[6];
     public nomina2() {
         initComponents();
-         //declaracion de todos los posibles nombres a mostrar por random, en el boton random
+         //declaracion de todos los posibles nombres a mostrar por random, en el boton random, tambien los salarios
         vectNombre[0]="ANTONIO";vectNombre[3]="MARIA CARMEN";vectNombre[6]="JOSEFA";vectNombre[9]="PEDRO";
         vectNombre[1]="JOSE";vectNombre[4]="FRANCISCO";vectNombre[7]="ISABEL";
         vectNombre[2]="MARIA";vectNombre[5]="JUAN";vectNombre[8]="MANUEL";
@@ -214,6 +213,7 @@ public class nomina2 extends javax.swing.JFrame {
         for(int i=0;i<=5;i++){
             vectTotal[i]=0;
         }       
+        //se llama al metodo mostrar
         mostrarentabla();
     }
     private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
