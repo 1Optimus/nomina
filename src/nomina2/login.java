@@ -25,7 +25,7 @@ public class login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JPasswordField();
+        txtContra = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
 
@@ -42,46 +42,51 @@ public class login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("CONTRASEÑA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("USUARIO");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 210, -1));
-        getContentPane().add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 210, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 210, -1));
+        getContentPane().add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 210, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setText("LOGIN");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
 
         lblError.setBackground(new java.awt.Color(255, 0, 0));
         lblError.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 0, 0));
         lblError.setText("Usuario/Contraseña estan incorrectos");
-        getContentPane().add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, -1, -1));
+        getContentPane().add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
        //Codigo que permite consultar registros en la base de datos
-       String stUsuario="", stContra="";
+       String stEstado="", stContra="";
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd1", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `usuario` where nombre ='"+txtUsuario.getText().trim()+"'");                 
             ResultSet rs = pst.executeQuery();      
             if(rs.next()){
-               stUsuario=(rs.getString("nombre"));
+               stEstado=(rs.getString("estadousuario"));
                stContra=(rs.getString("clave"));  
-               JOptionPane.showMessageDialog(null,"Creo que si funciono");
-            } else {
-             lblError.setVisible(true);
             }
-            
+            if(stContra.equals(txtContra.getText())){
+            if(stEstado.equals("1")){            
+                nomina2 pantalla=new nomina2();
+                pantalla.setVisible(true);
+                dispose();
+            }
+            }else{
+               lblError.setVisible(true); 
+            }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Base de datos no enlazada");
         }
@@ -128,7 +133,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblError;
-    private javax.swing.JPasswordField txtContraseña;
+    private javax.swing.JPasswordField txtContra;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
