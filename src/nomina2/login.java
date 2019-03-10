@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nomina2;
 
 /**
  *
- * @author Miguel Angel Chamizo
+ * @author ricardo perez 1255
+ * es el login del programa, con base de datos
  */
 public class login extends javax.swing.JFrame {
 
