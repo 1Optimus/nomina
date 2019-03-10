@@ -1,5 +1,6 @@
 package nomina2;
-
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  * @author ricardo perez 1255
  * es el login del programa, con base de datos
@@ -36,6 +37,11 @@ public class login extends javax.swing.JFrame {
         btnIngresar.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(190, 243, 85));
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -60,6 +66,26 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+       //Codigo que permite consultar registros en la base de datos
+       String stUsuario="", stContra="";
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd1", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `usuario` where nombre ='"+txtUsuario.getText().trim()+"'");                 
+            ResultSet rs = pst.executeQuery();      
+            if(rs.next()){
+               stUsuario=(rs.getString("nombre"));
+               stContra=(rs.getString("clave"));  
+               JOptionPane.showMessageDialog(null,"Creo que si funciono");
+            } else {
+             lblError.setVisible(true);
+            }
+            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Base de datos no enlazada");
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
