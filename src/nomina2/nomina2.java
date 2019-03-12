@@ -177,7 +177,7 @@ public class nomina2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-          //codigo utilizado para mostrar el vector de totales por departamentos
+          //codigo utilizado para mostrar el vector de totales por departamentos en la tabla
         tbtotal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {vectTotal[1]},
