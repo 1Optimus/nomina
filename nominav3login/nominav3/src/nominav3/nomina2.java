@@ -219,8 +219,8 @@ public class nomina2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
-        // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
-        limpiar();
+     // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
+       limpiar();
         int rmd,rmd2;
         double rmdIgss;
         for(int i=0;i<=9;i++){
@@ -231,73 +231,72 @@ public class nomina2 extends javax.swing.JFrame {
             matPrincipal[i][0]="#"+(i+1);
             rmd=numerorandom(0,4);
             matPrincipal[i][2]=String.valueOf(vectSalario[rmd]);
-            rmdIgss=(Double.parseDouble(matPrincipal[i][2])*0.12);
-            matPrincipal[i][3]=String.valueOf(rmdIgss);
+            rmdIgss=(Double.parseDouble(matPrincipal[i][2])*0.0483);
+            matPrincipal[i][3]=String.valueOf((Double)rmdIgss);
             rmd=numerorandom(200,300);
             matPrincipal[i][4]=String.valueOf(rmd);
             rmd=numerorandom(1,300);
-            matPrincipal[i][5]=String.valueOf(rmd);
+            matPrincipal[i][5]=String.valueOf(rmd);             
             rmd=numerorandom(1,5);
             matPrincipal[i][9]=String.valueOf(rmd);
             rmd=numerorandom(200,1000);
-            matPrincipal[i][7]=String.valueOf(rmd);
-        }
-        mostrarentabla();
+            matPrincipal[i][7]=String.valueOf(rmd);  
+        }       
+         mostrarentabla();
     }//GEN-LAST:event_btnrandomActionPerformed
 
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
-        //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
+         //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
         //dependiendo del salario que gana al anio se le saca el porcentaje de isr
-        double itSal;
+        double itSal,itImp,itTotal;
         String datoIg;
-        double itImp,itTotal;
         //codigo para calcular el isr
         if((matPrincipal[1][1])==null){
-            JOptionPane.showMessageDialog(null,"no ah generado datos aun.");
+        JOptionPane.showMessageDialog(null,"no ah generado datos aun.");
         }else{
-            for(int i=0;i<=9;i++){
-                itSal=Double.parseDouble(matPrincipal[i][2])*12;
-                if(itSal>30000){
-                    itImp=(itSal*0.07)/12;
-                }else{
-                    itImp=(itSal*0.05)/12;
-                }
-                matPrincipal[i][6]=String.valueOf(itImp);
+          for(int i=0;i<=9;i++){
+          itSal=(Double.parseDouble(matPrincipal[i][2]))*12;
+          if(itSal>30000){
+              itImp=(itSal*0.07)/12;
+          }else{
+          itImp=(itSal*0.05)/12;
+          }
+          matPrincipal[i][6]=String.valueOf(itImp);
+          }
+          //codigo para introducir lo que es el descuento igss
+          for (int i=0;i<=9;i++){
+          datoIg=JOptionPane.showInputDialog("Permetir IGSS a: "+matPrincipal[i][1]+"\n1 para si \n 2 para no");          
+          if("2".equals(datoIg)){             
+              matPrincipal[i][3]="0";
+          }else if("1".equals(datoIg)){
+            
+          } else {
+             
+                --i;
+                
+          }
+          }
+          //codigo para hacer las sumas de los totales y del vector de totales por departamento
+        for(int i=0;i<=9;i++){
+            itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
+            matPrincipal[i][8]=String.valueOf(itTotal);
+            if(Integer.parseInt(matPrincipal[i][9])==1){
+                vectTotal[1]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[1]);
             }
-            //codigo para introducir lo que es el descuento igss
-            for (int i=0;i<=9;i++){
-                datoIg=JOptionPane.showInputDialog("Permetir IGSS a: "+matPrincipal[i][1]+"\n1 para si \n 2 para no");
-                if("2".equals(datoIg)){
-                    matPrincipal[i][3]="0";
-                }else if("1".equals(datoIg)){
-
-                } else {
-
-                    --i;
-
-                }
+            if(Integer.parseInt(matPrincipal[i][9])==2){
+                vectTotal[2]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[2]);
             }
-            //codigo para hacer las sumas de los totales y del vector de totales por departamento
-            for(int i=0;i<=9;i++){
-                itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
-                matPrincipal[i][8]=String.valueOf(itTotal);
-                if(Integer.parseInt(matPrincipal[i][9])==1){
-                    vectTotal[1]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[1]);
-                }
-                if(Integer.parseInt(matPrincipal[i][9])==2){
-                    vectTotal[2]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[2]);
-                }
-                if(Integer.parseInt(matPrincipal[i][9])==3){
-                    vectTotal[3]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[3]);
-                }
-                if(Integer.parseInt(matPrincipal[i][9])==4){
-                    vectTotal[4]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[4]);
-                }
-                if(Integer.parseInt(matPrincipal[i][9])==5){
-                    vectTotal[5]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[5]);
-                }
+            if(Integer.parseInt(matPrincipal[i][9])==3){
+                vectTotal[3]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[3]);
             }
-            mostrarentabla();
+            if(Integer.parseInt(matPrincipal[i][9])==4){
+                vectTotal[4]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[4]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==5){
+                vectTotal[5]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[5]);
+            }
+        }
+      mostrarentabla();
         }
     }//GEN-LAST:event_btncalcularActionPerformed
 

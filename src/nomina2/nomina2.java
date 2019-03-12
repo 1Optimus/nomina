@@ -3,7 +3,7 @@ package nomina2;
 import javax.swing.JOptionPane;
 /*
 *Ricardo Perez 1255 no tiene login ni base de datos
-* ya estan subidos el del examen y el de la nomina con login y cronograma
+* ya estan subidos el del examen y el de la nomina con login y cronograma.
 */
 public class nomina2 extends javax.swing.JFrame {
     /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
