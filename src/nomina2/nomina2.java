@@ -232,8 +232,8 @@ public class nomina2 extends javax.swing.JFrame {
             matPrincipal[i][0]="#"+(i+1);
             rmd=numerorandom(0,4);
             matPrincipal[i][2]=String.valueOf(vectSalario[rmd]);
-            rmdIgss=(Double.parseDouble(matPrincipal[i][2])*0.12);
-            matPrincipal[i][3]=String.valueOf(rmdIgss);
+            rmdIgss=(Double.parseDouble(matPrincipal[i][2])*0.0483);
+            matPrincipal[i][3]=String.valueOf((Double)rmdIgss);
             rmd=numerorandom(200,300);
             matPrincipal[i][4]=String.valueOf(rmd);
             rmd=numerorandom(1,300);
@@ -249,15 +249,14 @@ public class nomina2 extends javax.swing.JFrame {
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
         //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
         //dependiendo del salario que gana al anio se le saca el porcentaje de isr
-        double itSal;
+        double itSal,itImp,itTotal;
         String datoIg;
-        double itImp,itTotal;
         //codigo para calcular el isr
         if((matPrincipal[1][1])==null){
         JOptionPane.showMessageDialog(null,"no ah generado datos aun.");
         }else{
           for(int i=0;i<=9;i++){
-          itSal=Double.parseDouble(matPrincipal[i][2])*12;
+          itSal=(Double.parseDouble(matPrincipal[i][2]))*12;
           if(itSal>30000){
               itImp=(itSal*0.07)/12;
           }else{
