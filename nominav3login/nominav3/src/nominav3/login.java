@@ -81,20 +81,24 @@ public class login extends javax.swing.JFrame {
         //Codigo que permite consultar registros en la base de datos
         String stEstado="", stContra="";
         try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd1", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `usuario` where nombre ='"+txtUsuario.getText().trim()+"'");
+            //conexion de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `usuario` where us_nombre ='"+txtUsuario.getText().trim()+"'");
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
-                stEstado=(rs.getString("estadousuario"));
-                stContra=(rs.getString("clave"));
+                //lecturade datos
+                stEstado=(rs.getString("us_estadousuario"));
+                stContra=(rs.getString("us_clave"));
             }
             if(stContra.equals(txtContra.getText())){
-                if(stEstado.equals("1")){
-                    nomina2 pantalla=new nomina2();
+                //verificacion de estado de usuario y tambien codigo para cambiar de pantalla
+                if(stEstado.equals("2")){
+                    menu pantalla=new menu();
                     pantalla.setVisible(true);
                     dispose();
                 }
             }else{
+                //se muestra el error
                 lblError.setVisible(true);
             }
         }catch (Exception e){
