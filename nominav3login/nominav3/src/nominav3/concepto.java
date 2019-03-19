@@ -1,17 +1,37 @@
 package nominav3;
 import java.sql.*;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Ricardo perez
+ *  try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con=DriverManager.getConnection(""+l+"","root"," ");
+            Statement s=con.createStatement();
+           String SQL="select count(*) from TELEFONO";
+           ResultSet rs=s.executeQuery(SQL);
+           String jo="";
+              if (rs.next()) {
+                  jo=rs.getString(1);
+                   j=Integer.parseInt(jo);
+                   if (j==0) {
+                      j1=1;
+                  }else{
+                  j1=j+1;
+              }
+
+              }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
+        }
  */
-public class depto extends javax.swing.JFrame {
+public class concepto extends javax.swing.JFrame {
 int j1;
-    String stmtPrincipal[][]=new String[15][2];
-    public depto() {
+    String stmtPrincipal[][]=new String[15][3];  
+    public concepto() {
         initComponents();
         grupo.add(rbtel);
+        grupo2.add(rbtm);grupo2.add(rbtme);
         grupo.add(rbtvi);grupo.add(rbtin);
         nomostrar();
         llenardatos();
@@ -25,6 +45,8 @@ btnin.setVisible(false);
 btnvi.setVisible(false);
 btnel.setVisible(false);
 jScrollPane1.setVisible(false);
+rbtm.setVisible(false);
+rbtme.setVisible(false);
 }
  public void codigoauto(){
         //codigo para saber cuantas lineas hay en la base de datos y asi poder llenar el codigo sin ingresar
@@ -32,7 +54,7 @@ jScrollPane1.setVisible(false);
           try {              
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="SELECT * FROM departamentos";
+           String SQL="SELECT * FROM concepto";
            ResultSet rs=s.executeQuery(SQL);
             boolean r=rs.next();
             while(r){
@@ -50,12 +72,12 @@ jScrollPane1.setVisible(false);
         try{
             //conexion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM departamentos");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM concepto");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
-                this.cmbNom.addItem(rs.getString("dep_nombre"));
-                this.cmbCod.addItem(rs.getString("dep_codigo"));
+                this.cmbNom.addItem(rs.getString("con_nombre"));
+                this.cmbCod.addItem(rs.getString("con_codigo"));
                 r=rs.next();            
             }
         }catch (Exception e){
@@ -72,6 +94,7 @@ jScrollPane1.setVisible(false);
     private void initComponents() {
 
         grupo = new javax.swing.ButtonGroup();
+        grupo2 = new javax.swing.ButtonGroup();
         rbtin = new javax.swing.JRadioButton();
         rbtel = new javax.swing.JRadioButton();
         rbtvi = new javax.swing.JRadioButton();
@@ -85,10 +108,11 @@ jScrollPane1.setVisible(false);
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnvi = new javax.swing.JButton();
+        rbtme = new javax.swing.JRadioButton();
+        rbtm = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1109, 573));
-        setPreferredSize(new java.awt.Dimension(1109, 573));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rbtin.setText("Ingresar");
@@ -97,7 +121,7 @@ jScrollPane1.setVisible(false);
                 rbtinMouseClicked(evt);
             }
         });
-        getContentPane().add(rbtin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, -1));
+        getContentPane().add(rbtin, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
 
         rbtel.setText("Eliminar");
         rbtel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,7 +129,7 @@ jScrollPane1.setVisible(false);
                 rbtelMouseClicked(evt);
             }
         });
-        getContentPane().add(rbtel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
+        getContentPane().add(rbtel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
         rbtvi.setText("Visualizar");
         rbtvi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,10 +137,10 @@ jScrollPane1.setVisible(false);
                 rbtviMouseClicked(evt);
             }
         });
-        getContentPane().add(rbtvi, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, -1, -1));
+        getContentPane().add(rbtvi, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, -1));
 
-        jLabel1.setText("Departamentos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
+        jLabel1.setText("Concepto");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
 
         btnin.setText("Ingresar");
         btnin.addActionListener(new java.awt.event.ActionListener() {
@@ -124,14 +148,14 @@ jScrollPane1.setVisible(false);
                 btninActionPerformed(evt);
             }
         });
-        getContentPane().add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 170, -1));
-        getContentPane().add(txtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 170, -1));
+        getContentPane().add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 170, -1));
+        getContentPane().add(txtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 170, -1));
 
         l1.setText("Nombre");
-        getContentPane().add(l1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, -1));
+        getContentPane().add(l1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, -1));
 
         cmbCod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cmbCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, -1, -1));
+        getContentPane().add(cmbCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
         cmbNom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbNom.addItemListener(new java.awt.event.ItemListener() {
@@ -144,7 +168,7 @@ jScrollPane1.setVisible(false);
                 cmbNomActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 170, -1));
+        getContentPane().add(cmbNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 170, -1));
 
         btnel.setText("Eliminar");
         btnel.addActionListener(new java.awt.event.ActionListener() {
@@ -152,22 +176,22 @@ jScrollPane1.setVisible(false);
                 btnelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 170, -1));
+        getContentPane().add(btnel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 170, -1));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "codigo", "nombre"
+                "codigo", "nombre", "Efecto"
             }
         ));
         jScrollPane1.setViewportView(tabla);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 640, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 640, 140));
 
         btnvi.setText("Visualizar");
         btnvi.addActionListener(new java.awt.event.ActionListener() {
@@ -175,96 +199,111 @@ jScrollPane1.setVisible(false);
                 btnviActionPerformed(evt);
             }
         });
-        getContentPane().add(btnvi, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, 170, -1));
+        getContentPane().add(btnvi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 170, -1));
+
+        rbtme.setText("Menos");
+        rbtme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtmeMouseClicked(evt);
+            }
+        });
+        getContentPane().add(rbtme, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, -1, -1));
+
+        rbtm.setText("Más");
+        getContentPane().add(rbtm, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtinMouseClicked
-   nomostrar();
+        nomostrar();
         txtnom.setVisible(true);
-    l1.setVisible(true);
-    btnin.setVisible(true);              
+        l1.setVisible(true);
+        btnin.setVisible(true);
+        rbtm.setVisible(true);rbtme.setVisible(true);
     }//GEN-LAST:event_rbtinMouseClicked
 
     private void rbtelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtelMouseClicked
-   nomostrar();
-   llenardatos();
-   cmbNom.setVisible(true);
-   btnel.setVisible(true);
-   l1.setVisible(true);
-         
+        nomostrar();
+        llenardatos();
+        cmbNom.setVisible(true);
+        btnel.setVisible(true);
+        l1.setVisible(true);       
     }//GEN-LAST:event_rbtelMouseClicked
-
-    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
-        //codigos para guardar el nuevo dato en la tabla departamentos
-        codigoauto();
-        try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `departamentos` (`dep_codigo`, `dep_nombre`) VALUES ('"+(j1+1)+"', '"+txtnom.getText().trim()+"');");
-            pst.executeUpdate();
-                        txtnom.setText("");
-            JOptionPane.showMessageDialog(null,"Dato guardado con exito");
-        }catch (Exception e){
-          JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
-    }//GEN-LAST:event_btninActionPerformed
-
-    private void btnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelActionPerformed
-        //codigos para elimiar el dato en la tabla departamentos
-        try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `departamentos` WHERE dep_codigo='"+cmbCod.getSelectedItem()+"'");
-            pst.executeUpdate();
-            cmbNom.setSelectedIndex(0);
-            JOptionPane.showMessageDialog(null,"Dato eliminado con exito");
-        }catch (Exception e){
-          JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
-    }//GEN-LAST:event_btnelActionPerformed
-
-    private void cmbNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbNomActionPerformed
-
-    private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
-         try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
-        catch(Exception e){
-        }
-    }//GEN-LAST:event_cmbNomItemStateChanged
 
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
         nomostrar();
         jScrollPane1.setVisible(true);
         btnvi.setVisible(true);
-         for(int i=0;i<=14;i++){
-            for(int y=0;y<=1;y++){
+           for(int i=0;i<=14;i++){
+            for(int y=0;y<=2;y++){
                 stmtPrincipal[i][y]="";
             }
         }
-          //codigo para mostrarlo en la matriz
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+          tabla.setModel(new javax.swing.table.DefaultTableModel(
             stmtPrincipal,
             new String [] {
-                "Codigo", "Nombre"
+                "Codigo", "Nombre","Efecto"
             }
-        ));
+        ));     
     }//GEN-LAST:event_rbtviMouseClicked
 
-    private void btnviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviActionPerformed
-                //Codigo que permite consultar registros en la base de datos
-        int x=0,itEstado;//variable para la matriz               
+    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
+        //codigos para guardar el nuevo dato en la tabla departamentos
+        codigoauto();
+        int itEfecto=0;
+        if(rbtm.isSelected()){itEfecto=2;}else{itEfecto=1;}
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `departamentos`;");         
-              ResultSet rs = pst.executeQuery();            
-             boolean r=rs.next();
-                while(r){
-                   stmtPrincipal[x][0]=rs.getString("dep_codigo");
-                   stmtPrincipal[x][1]=rs.getString("dep_nombre");                         
-                    r=rs.next();  
-                    x++;
-                }
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `concepto` (`con_codigo`, `con_nombre`,`con_efecto`) VALUES ('"+(j1+1)+"', '"+txtnom.getText().trim()+"','"+itEfecto+"');");
+            pst.executeUpdate();
+            txtnom.setText("");
+            JOptionPane.showMessageDialog(null,"Dato guardado con exito");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+    }//GEN-LAST:event_btninActionPerformed
+
+    private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
+        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
+        catch(Exception e){
+        }
+    }//GEN-LAST:event_cmbNomItemStateChanged
+
+    private void cmbNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbNomActionPerformed
+
+    private void btnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelActionPerformed
+        //codigos para elimiar el dato en la tabla departamentos
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `concepto` WHERE con_codigo='"+cmbCod.getSelectedItem()+"'");
+            pst.executeUpdate();
+            cmbNom.setSelectedIndex(0);
+            JOptionPane.showMessageDialog(null,"Dato eliminado con exito");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+    }//GEN-LAST:event_btnelActionPerformed
+
+    private void btnviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviActionPerformed
+        //Codigo que permite consultar registros en la base de datos
+        int itEfecto,x=0,itEstado;//variable para la matriz
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `concepto`;");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){
+                stmtPrincipal[x][0]=rs.getString("con_codigo");
+                stmtPrincipal[x][1]=rs.getString("con_nombre");
+                if((Integer.parseInt(rs.getString("con_efecto"))==1)){
+               stmtPrincipal[x][2]="Menos";
+                }else{stmtPrincipal[x][2]="Mas";}
+                r=rs.next();
+                x++;
+            }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal");
         }
@@ -272,15 +311,19 @@ jScrollPane1.setVisible(false);
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             stmtPrincipal,
             new String [] {
-                "Codigo", "Nombre"
+                "Codigo", "Nombre","Efecto"
             }
         ));
         for(int i=0;i<=14;i++){
-        for(int y=0;y<=1;y++){
-           stmtPrincipal[i][y]=""; 
-        }
+            for(int y=0;y<=2;y++){
+                stmtPrincipal[i][y]="";
+            }
         }
     }//GEN-LAST:event_btnviActionPerformed
+
+    private void rbtmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtmeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtmeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -299,20 +342,20 @@ jScrollPane1.setVisible(false);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(concepto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(concepto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(concepto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(concepto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new depto().setVisible(true);
+                new concepto().setVisible(true);
             }
         });
     }
@@ -324,11 +367,14 @@ jScrollPane1.setVisible(false);
     private javax.swing.JComboBox<String> cmbCod;
     private javax.swing.JComboBox<String> cmbNom;
     private javax.swing.ButtonGroup grupo;
+    private javax.swing.ButtonGroup grupo2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel l1;
     private javax.swing.JRadioButton rbtel;
     private javax.swing.JRadioButton rbtin;
+    private javax.swing.JRadioButton rbtm;
+    private javax.swing.JRadioButton rbtme;
     private javax.swing.JRadioButton rbtvi;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtnom;

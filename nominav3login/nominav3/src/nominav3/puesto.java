@@ -6,11 +6,11 @@ import javax.swing.JOptionPane;
  *
  * @author Ricardo perez
  */
-public class depto extends javax.swing.JFrame {
+public class puesto extends javax.swing.JFrame {
 int j1;
     String stmtPrincipal[][]=new String[15][2];
-    public depto() {
-        initComponents();
+    public puesto() {
+         initComponents();
         grupo.add(rbtel);
         grupo.add(rbtvi);grupo.add(rbtin);
         nomostrar();
@@ -32,7 +32,7 @@ jScrollPane1.setVisible(false);
           try {              
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="SELECT * FROM departamentos";
+           String SQL="SELECT * FROM puesto";
            ResultSet rs=s.executeQuery(SQL);
             boolean r=rs.next();
             while(r){
@@ -50,12 +50,12 @@ jScrollPane1.setVisible(false);
         try{
             //conexion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM departamentos");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM puesto");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
-                this.cmbNom.addItem(rs.getString("dep_nombre"));
-                this.cmbCod.addItem(rs.getString("dep_codigo"));
+                this.cmbNom.addItem(rs.getString("pues_nombre"));
+                this.cmbCod.addItem(rs.getString("pues_codigo"));
                 r=rs.next();            
             }
         }catch (Exception e){
@@ -88,7 +88,6 @@ jScrollPane1.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1109, 573));
-        setPreferredSize(new java.awt.Dimension(1109, 573));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rbtin.setText("Ingresar");
@@ -115,7 +114,7 @@ jScrollPane1.setVisible(false);
         });
         getContentPane().add(rbtvi, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, -1, -1));
 
-        jLabel1.setText("Departamentos");
+        jLabel1.setText("Puesto");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
 
         btnin.setText("Ingresar");
@@ -181,57 +180,20 @@ jScrollPane1.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtinMouseClicked
-   nomostrar();
+        nomostrar();
         txtnom.setVisible(true);
-    l1.setVisible(true);
-    btnin.setVisible(true);              
+        l1.setVisible(true);
+        btnin.setVisible(true);
     }//GEN-LAST:event_rbtinMouseClicked
 
     private void rbtelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtelMouseClicked
-   nomostrar();
-   llenardatos();
-   cmbNom.setVisible(true);
-   btnel.setVisible(true);
-   l1.setVisible(true);
-         
+        nomostrar();
+        llenardatos();
+        cmbNom.setVisible(true);
+        btnel.setVisible(true);
+        l1.setVisible(true);
+
     }//GEN-LAST:event_rbtelMouseClicked
-
-    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
-        //codigos para guardar el nuevo dato en la tabla departamentos
-        codigoauto();
-        try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `departamentos` (`dep_codigo`, `dep_nombre`) VALUES ('"+(j1+1)+"', '"+txtnom.getText().trim()+"');");
-            pst.executeUpdate();
-                        txtnom.setText("");
-            JOptionPane.showMessageDialog(null,"Dato guardado con exito");
-        }catch (Exception e){
-          JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
-    }//GEN-LAST:event_btninActionPerformed
-
-    private void btnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelActionPerformed
-        //codigos para elimiar el dato en la tabla departamentos
-        try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `departamentos` WHERE dep_codigo='"+cmbCod.getSelectedItem()+"'");
-            pst.executeUpdate();
-            cmbNom.setSelectedIndex(0);
-            JOptionPane.showMessageDialog(null,"Dato eliminado con exito");
-        }catch (Exception e){
-          JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
-    }//GEN-LAST:event_btnelActionPerformed
-
-    private void cmbNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbNomActionPerformed
-
-    private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
-         try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
-        catch(Exception e){
-        }
-    }//GEN-LAST:event_cmbNomItemStateChanged
 
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
         nomostrar();
@@ -242,29 +204,66 @@ jScrollPane1.setVisible(false);
                 stmtPrincipal[i][y]="";
             }
         }
-          //codigo para mostrarlo en la matriz
+        //codigo para mostrarlo en la matriz
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             stmtPrincipal,
             new String [] {
                 "Codigo", "Nombre"
             }
-        ));
+        ));       
     }//GEN-LAST:event_rbtviMouseClicked
 
-    private void btnviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviActionPerformed
-                //Codigo que permite consultar registros en la base de datos
-        int x=0,itEstado;//variable para la matriz               
+    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
+        //codigos para guardar el nuevo dato en la tabla departamentos
+        codigoauto();
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `departamentos`;");         
-              ResultSet rs = pst.executeQuery();            
-             boolean r=rs.next();
-                while(r){
-                   stmtPrincipal[x][0]=rs.getString("dep_codigo");
-                   stmtPrincipal[x][1]=rs.getString("dep_nombre");                         
-                    r=rs.next();  
-                    x++;
-                }
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `puesto` (`pues_codigo`, `pues_nombre`) VALUES ('"+(j1+1)+"', '"+txtnom.getText().trim()+"');");
+            pst.executeUpdate();
+            txtnom.setText("");
+            JOptionPane.showMessageDialog(null,"Dato guardado con exito");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+    }//GEN-LAST:event_btninActionPerformed
+
+    private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
+        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
+        catch(Exception e){
+        }
+    }//GEN-LAST:event_cmbNomItemStateChanged
+
+    private void cmbNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbNomActionPerformed
+
+    private void btnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelActionPerformed
+        //codigos para elimiar el dato en la tabla departamentos
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `puesto` WHERE pues_codigo='"+cmbCod.getSelectedItem()+"'");
+            pst.executeUpdate();
+            cmbNom.setSelectedIndex(0);
+            JOptionPane.showMessageDialog(null,"Dato eliminado con exito");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+    }//GEN-LAST:event_btnelActionPerformed
+
+    private void btnviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviActionPerformed
+        //Codigo que permite consultar registros en la base de datos
+        int x=0,itEstado;//variable para la matriz
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `puesto`;");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){
+                stmtPrincipal[x][0]=rs.getString("pues_codigo");
+                stmtPrincipal[x][1]=rs.getString("pues_nombre");
+                r=rs.next();
+                x++;
+            }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal");
         }
@@ -276,9 +275,9 @@ jScrollPane1.setVisible(false);
             }
         ));
         for(int i=0;i<=14;i++){
-        for(int y=0;y<=1;y++){
-           stmtPrincipal[i][y]=""; 
-        }
+            for(int y=0;y<=1;y++){
+                stmtPrincipal[i][y]="";
+            }
         }
     }//GEN-LAST:event_btnviActionPerformed
 
@@ -299,20 +298,20 @@ jScrollPane1.setVisible(false);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(puesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(puesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(puesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(depto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(puesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new depto().setVisible(true);
+                new puesto().setVisible(true);
             }
         });
     }

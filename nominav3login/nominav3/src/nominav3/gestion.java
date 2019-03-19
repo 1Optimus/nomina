@@ -142,7 +142,7 @@ public class gestion extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //mostrar la otra pantalla deseada
-        gestion pantalla=new gestion();
+        menu pantalla=new menu();
         pantalla.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -159,7 +159,10 @@ public class gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+//mostrar la otra pantalla deseada
+        depto pantalla=new depto();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -167,7 +170,10 @@ public class gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        //mostrar la otra pantalla deseada
+        puesto pantalla=new puesto();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -175,11 +181,17 @@ public class gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        //mostrar la otra pantalla deseada
+        usuarios pantalla=new usuarios();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        //mostrar la otra pantalla deseada
+        concepto pantalla=new concepto();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**

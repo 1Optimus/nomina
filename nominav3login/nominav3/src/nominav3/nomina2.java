@@ -1,31 +1,18 @@
-
 package nominav3;
-
+import java.sql.*;
 import javax.swing.JOptionPane;
-/*
-*Ricardo Perez 1255
-*/
+/**
+ *
+ * @author Ricardo perez
+ */
 public class nomina2 extends javax.swing.JFrame {
  /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
-    *vectores nombre y apelido usados para generas nombres random, y el salario para obtenerlo random
-    *el vector total es para el total de los departamentos
-    *y tambien se le declaran los datos 
-    */
-    String [][] matPrincipal= new String[10][10];
-    String [] vectNombre= new String[10];
-    String [] vectApellido= new String[10];
-    double [] vectSalario= new double[5];
+*/
+    int tam;
+    String [][] matPrincipal= new String[tam][10];
     double [] vectTotal= new double[6];
     public nomina2() {
-        initComponents();
-         //declaracion de todos los posibles nombres a mostrar por random, en el boton random, tambien los salarios
-        vectNombre[0]="ANTONIO";vectNombre[3]="MARIA CARMEN";vectNombre[6]="JOSEFA";vectNombre[9]="PEDRO";
-        vectNombre[1]="JOSE";vectNombre[4]="FRANCISCO";vectNombre[7]="ISABEL";
-        vectNombre[2]="MARIA";vectNombre[5]="JUAN";vectNombre[8]="MANUEL";
-        vectApellido[0]="GARCIA";vectApellido[3]="SANCHEZ";vectApellido[6]="MORENO";vectApellido[9]="RODRIGUEZ";
-        vectApellido[1]="MARTINEZ";vectApellido[4]="GONZALEZ";vectApellido[7]="JIMENEZ";
-        vectApellido[2]="LOPEZ";vectApellido[5]="GOMEZ";vectApellido[8]="PEREZ";
-        vectSalario[0]=3500;vectSalario[1]=4500;vectSalario[2]=5000;vectSalario[3]=7000;vectSalario[4]=7300;
+        initComponents();               
     }
      public void mostrarentabla(){
          //codigo utilizado para mostrar los datos en la tabla
@@ -221,26 +208,23 @@ public class nomina2 extends javax.swing.JFrame {
     private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
      // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
        limpiar();
-        int rmd,rmd2;
-        double rmdIgss;
-        for(int i=0;i<=9;i++){
-            //numero random para el llenado de la tabla, tambien esta salario y el departamento al que pertenece
-            rmd=numerorandom(0,9);
-            rmd2=numerorandom(0,9);
-            matPrincipal[i][1]=vectNombre[rmd]+" "+vectApellido[rmd2];
-            matPrincipal[i][0]="#"+(i+1);
-            rmd=numerorandom(0,4);
-            matPrincipal[i][2]=String.valueOf(vectSalario[rmd]);
-            rmdIgss=(Double.parseDouble(matPrincipal[i][2])*0.0483);
-            matPrincipal[i][3]=String.valueOf((Double)rmdIgss);
-            rmd=numerorandom(200,300);
-            matPrincipal[i][4]=String.valueOf(rmd);
-            rmd=numerorandom(1,300);
-            matPrincipal[i][5]=String.valueOf(rmd);             
-            rmd=numerorandom(1,5);
-            matPrincipal[i][9]=String.valueOf(rmd);
-            rmd=numerorandom(200,1000);
-            matPrincipal[i][7]=String.valueOf(rmd);  
+       int j1;
+          //codigo para saber cuantas lineas hay en la base de datos y asi poder saber la cantidad para el for
+        j1=0;
+          try {              
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            Statement s=con.createStatement();
+           String SQL="SELECT * FROM departamentos";
+           ResultSet rs=s.executeQuery(SQL);
+            boolean r=rs.next();
+            while(r){
+                j1=j1+1;
+                r=rs.next();            
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
+        }
+        for(int i=0;i<=9;i++){ 
         }       
          mostrarentabla();
     }//GEN-LAST:event_btnrandomActionPerformed
