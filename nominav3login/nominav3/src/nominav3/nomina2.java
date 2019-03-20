@@ -2,29 +2,49 @@ package nominav3;
 import java.sql.*;
 import javax.swing.JOptionPane;
 /**
- *
  * @author Ricardo perez
  */
 public class nomina2 extends javax.swing.JFrame {
- /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
-*/
-    int tam;
-    String [][] matPrincipal= new String[tam][10];
-    double [] vectTotal= new double[6];
+ /*declaracion de todas mas matris a usarse, inlcuido matriz de totales*/
+    int tam,j1,j;
+    double dbTotal=0.0;
+    String [][] matPrincipal= new String[25][10];
+    double [] vectTotal= new double[15];
     public nomina2() {
         initComponents();               
     }
+    public void codigoauto(){
+      try {
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            Statement s=con.createStatement();
+           String SQL="select count(*) from nominaencabezado";
+           ResultSet rs=s.executeQuery(SQL);
+           String jo="";
+              if (rs.next()) {
+                  jo=rs.getString(1);
+                   j=Integer.parseInt(jo);
+                   if (j==0) {
+                      j1=1;
+                  }else{
+                  j1=j+1;
+              }
+
+              }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
+        }
+    }
      public void mostrarentabla(){
          //codigo utilizado para mostrar los datos en la tabla
-          tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); 
         tbprincipal.setModel(new javax.swing.table.DefaultTableModel(
             matPrincipal,
-            new String [] {
+             new String [] {
                 "No.", "Nombre empleado", "Sueldo", "IGSS", "Bonificacion", "Comision", "ISR", "Desc Judicial", "Sueldo liquido", "Departamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true, false, false
+                false, false, false, false, true, true, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -38,7 +58,16 @@ public class nomina2 extends javax.swing.JFrame {
                 {vectTotal[2]},
                 {vectTotal[3]},
                 {vectTotal[4]},
-                {vectTotal[5]}
+                {vectTotal[5]},
+                {vectTotal[6]},
+                {vectTotal[7]},
+                {vectTotal[8]},
+                {vectTotal[9]},
+                {vectTotal[10]},
+                {vectTotal[11]},
+                {vectTotal[12]},
+                {vectTotal[13]},
+                {vectTotal[14]}
             },
             new String [] {
                 "Cantidad"
@@ -53,12 +82,6 @@ public class nomina2 extends javax.swing.JFrame {
             }
         });
 }
-    public int numerorandom(int n1,int n2){
-        //se optienen dos valores para retornar el random
-        int rmd;
-        rmd=n1+(int)(Math.random()*n2);
-        return rmd;
-    }
     public void limpiar(){
          // solo limpiamos los vectores y mostramos
         for(int i=0;i<=9;i++){
@@ -81,7 +104,7 @@ public class nomina2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbtotal = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnrandom = new javax.swing.JButton();
+        btninsertar = new javax.swing.JButton();
         btncalcular = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,6 +112,11 @@ public class nomina2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnlimpiar = new javax.swing.JButton();
+        btnguar = new javax.swing.JButton();
+        txtff = new javax.swing.JTextField();
+        txtfi = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1402, 531));
@@ -113,7 +141,7 @@ public class nomina2 extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true, false, false
+                false, false, false, false, false, true, false, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,16 +181,16 @@ public class nomina2 extends javax.swing.JFrame {
         jLabel1.setText("Nomina");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 170, 60));
 
-        btnrandom.setBackground(new java.awt.Color(255, 148, 42));
-        btnrandom.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        btnrandom.setForeground(new java.awt.Color(190, 243, 85));
-        btnrandom.setText("Random");
-        btnrandom.addActionListener(new java.awt.event.ActionListener() {
+        btninsertar.setBackground(new java.awt.Color(255, 148, 42));
+        btninsertar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btninsertar.setForeground(new java.awt.Color(190, 243, 85));
+        btninsertar.setText("Insertar");
+        btninsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrandomActionPerformed(evt);
+                btninsertarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnrandom, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, -1, -1));
+        getContentPane().add(btninsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, -1));
 
         btncalcular.setBackground(new java.awt.Color(255, 148, 42));
         btncalcular.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -174,7 +202,7 @@ public class nomina2 extends javax.swing.JFrame {
                 btncalcularActionPerformed(evt);
             }
         });
-        getContentPane().add(btncalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, -1, -1));
+        getContentPane().add(btncalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, -1, -1));
 
         jLabel2.setText("consejeros");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
@@ -200,68 +228,86 @@ public class nomina2 extends javax.swing.JFrame {
                 btnlimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 380, -1, -1));
+        getContentPane().add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, -1, -1));
+
+        btnguar.setBackground(new java.awt.Color(255, 148, 42));
+        btnguar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnguar.setForeground(new java.awt.Color(190, 243, 85));
+        btnguar.setText("Guardar");
+        btnguar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnguar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 380, -1, -1));
+        getContentPane().add(txtff, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 460, 140, -1));
+        getContentPane().add(txtfi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 390, 140, -1));
+
+        jLabel7.setText("Fecha  final");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 430, -1, -1));
+
+        jLabel8.setText("Fecha incio");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 360, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
-     // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
+    private void btninsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertarActionPerformed
+       // por medio de variables se generan numeros random, para obtener datos, y obtener asi numeros a la azar para llenar la tabla
        limpiar();
-       int j1;
-          //codigo para saber cuantas lineas hay en la base de datos y asi poder saber la cantidad para el for
-        j1=0;
-          try {              
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            Statement s=con.createStatement();
-           String SQL="SELECT * FROM departamentos";
-           ResultSet rs=s.executeQuery(SQL);
+        //Codigo que permite consultar registros en la base de datos
+        int x=0;//variable para la matriz
+       double dbIgss,dbSalario,dbIsr=0.0;
+        try{//
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `empleados`;");
+            ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
-                j1=j1+1;
-                r=rs.next();            
+                matPrincipal[x][0]=rs.getString("emp_codigo");
+                matPrincipal[x][1]=rs.getString("emp_nombre");
+                matPrincipal[x][2]=rs.getString("emp_sueldonom");
+                dbIgss=(Double.parseDouble(matPrincipal[x][2]))*0.0483;//calcula el igss
+                matPrincipal[x][3]=String.valueOf(dbIgss);
+                dbSalario=(Double.parseDouble(matPrincipal[x][2]))*12;//calculo de isr
+                if(dbSalario>30000){
+                   dbIsr=(dbSalario*0.07)/12;
+                 }else{
+                    dbIsr=(dbSalario*0.05)/12;
+                 }
+                 matPrincipal[x][6]=String.valueOf(dbIsr);//se guarda el isr en la matriz
+                 matPrincipal[x][9]=rs.getString("dep_cod");
+                r=rs.next();
+                x++;
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un Error fatal");
         }
         for(int i=0;i<=9;i++){ 
+            
         }       
          mostrarentabla();
-    }//GEN-LAST:event_btnrandomActionPerformed
+    }//GEN-LAST:event_btninsertarActionPerformed
 
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
-         //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
+          //se hacen las suma del salario liquido y para los totales del departamento, obtiene los valores de la matriz hacia el vector total
         //dependiendo del salario que gana al anio se le saca el porcentaje de isr
         double itSal,itImp,itTotal;
         String datoIg;
-        //codigo para calcular el isr
-        if((matPrincipal[1][1])==null){
-        JOptionPane.showMessageDialog(null,"no ah generado datos aun.");
-        }else{
-          for(int i=0;i<=9;i++){
-          itSal=(Double.parseDouble(matPrincipal[i][2]))*12;
-          if(itSal>30000){
-              itImp=(itSal*0.07)/12;
-          }else{
-          itImp=(itSal*0.05)/12;
-          }
-          matPrincipal[i][6]=String.valueOf(itImp);
-          }
-          //codigo para introducir lo que es el descuento igss
-          for (int i=0;i<=9;i++){
-          datoIg=JOptionPane.showInputDialog("Permetir IGSS a: "+matPrincipal[i][1]+"\n1 para si \n 2 para no");          
-          if("2".equals(datoIg)){             
-              matPrincipal[i][3]="0";
-          }else if("1".equals(datoIg)){
-            
-          } else {
-             
-                --i;
-                
-          }
+        if((matPrincipal[0][1])==null){
+        }else{  
+          for (int i=0;i<=24;i++){
+             if(((String.valueOf(matPrincipal[i][0])).equals(""))||((String.valueOf(matPrincipal[i][0])).equals("null"))){
+            }else{
+             matPrincipal[i][4]=(String)tbprincipal.getValueAt(i,4);
+             matPrincipal[i][5]=(String)tbprincipal.getValueAt(i,5);
+             matPrincipal[i][7]=(String)tbprincipal.getValueAt(i,7);  
+             }
           }
           //codigo para hacer las sumas de los totales y del vector de totales por departamento
-        for(int i=0;i<=9;i++){
+        for(int i=0;i<=3;i++){
+            if(((String.valueOf(matPrincipal[i][0])).equals(""))||((String.valueOf(matPrincipal[i][0])).equals("null"))){
+            }else{
             itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
             matPrincipal[i][8]=String.valueOf(itTotal);
             if(Integer.parseInt(matPrincipal[i][9])==1){
@@ -279,15 +325,119 @@ public class nomina2 extends javax.swing.JFrame {
             if(Integer.parseInt(matPrincipal[i][9])==5){
                 vectTotal[5]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[5]);
             }
-        }
-      mostrarentabla();
+            if(Integer.parseInt(matPrincipal[i][9])==6){
+                vectTotal[6]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[1]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==7){
+                vectTotal[7]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[2]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==8){
+                vectTotal[8]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[3]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==9){
+                vectTotal[9]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[4]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==10){
+                vectTotal[10]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[5]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==11){
+                vectTotal[11]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[1]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==12){
+                vectTotal[12]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[2]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==13){
+                vectTotal[13]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[3]);
+            }
+            if(Integer.parseInt(matPrincipal[i][9])==14){
+                vectTotal[14]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[4]);
+            }
+            dbTotal=itTotal+dbTotal;
+        }}
+      mostrarentabla();              
         }
     }//GEN-LAST:event_btncalcularActionPerformed
 
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         //se llama al metodo de limpiar tablas, lo cual borra las matrices y limpa la tabla
         limpiar();
+        codigoauto();
     }//GEN-LAST:event_btnlimpiarActionPerformed
+
+    private void btnguarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguarActionPerformed
+            codigoauto();
+            double dbTotales=0.0;
+        for(int i=0;i<=14;i++){
+          if(((String.valueOf(vectTotal[i])).equals(""))||((String.valueOf(vectTotal[i])).equals("null"))||((String.valueOf(vectTotal[i])).equals("0.0"))){
+            }else{   
+              dbTotales=dbTotales+vectTotal[i];
+          }
+        }
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominaencabezado` (`nomi_codigo`, `nomi_fechaini`, `nom_fechafin`, `nomi_monto`, `ban_codigo`) VALUES ('"+j1+"', '"+txtfi.getText().trim()+"', '"+txtff.getText().trim()+"', '"+dbTotales+"', '1');");
+            pst.executeUpdate();
+            txtff.setText("");
+            txtfi.setText("");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+        for(int i=0;i<=24;i++){
+             if(((String.valueOf(matPrincipal[i][0])).equals(""))||((String.valueOf(matPrincipal[i][0])).equals("null"))){
+            }else{                 
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '1', '"+(String.valueOf(matPrincipal[i][2]))+"');");
+            pst.executeUpdate();           
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 1 "+e);
+        }
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '6', '"+(String.valueOf(matPrincipal[i][3]))+"');");
+            pst.executeUpdate();           
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 2 "+e);
+        }
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '2', '"+(String.valueOf(matPrincipal[i][4]))+"');");
+            pst.executeUpdate();            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 3 "+e);
+        }
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '3', '"+(String.valueOf(matPrincipal[i][5]))+"');");
+            pst.executeUpdate();            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 4 "+e);
+        }
+         try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '4', '"+(String.valueOf(matPrincipal[i][6]))+"');");
+            pst.executeUpdate();            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 5 "+e);
+        }
+             try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '5', '"+(String.valueOf(matPrincipal[i][7]))+"');");
+            pst.executeUpdate();            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 6 "+e);
+        }
+              try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '7', '"+(String.valueOf(matPrincipal[i][8]))+"');");
+            pst.executeUpdate();            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error 7 "+e);
+        }
+             }             
+             
+        }
+    }//GEN-LAST:event_btnguarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,17 +476,22 @@ public class nomina2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncalcular;
+    private javax.swing.JButton btnguar;
+    private javax.swing.JButton btninsertar;
     private javax.swing.JButton btnlimpiar;
-    private javax.swing.JButton btnrandom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbprincipal;
     private javax.swing.JTable tbtotal;
+    private javax.swing.JTextField txtff;
+    private javax.swing.JTextField txtfi;
     // End of variables declaration//GEN-END:variables
 }
