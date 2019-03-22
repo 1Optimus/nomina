@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
  * @author Ricardo perez
  */
 public class usuarios extends javax.swing.JFrame {
-int j1;
+int j1,j;
     String stmtPrincipal[][]=new String[15][5];  
     public usuarios() {
          initComponents();
@@ -38,16 +38,22 @@ rbtme.setVisible(false);
  public void codigoauto(){
         //codigo para saber cuantas lineas hay en la base de datos y asi poder llenar el codigo sin ingresar
         j1=0;
-          try {              
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+           try {
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="SELECT * FROM usuario";
+           String SQL="select count(*) from usuario";
            ResultSet rs=s.executeQuery(SQL);
-            boolean r=rs.next();
-            while(r){
-                j1=j1+1;
-                r=rs.next();            
-            }            
+           String jo="";
+              if (rs.next()) {
+                  jo=rs.getString(1);
+                   j=Integer.parseInt(jo);
+                   if (j==0) {
+                      j1=1;
+                  }else{
+                  j1=j+1;
+              }
+
+              }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
         }
@@ -119,6 +125,7 @@ rbtme.setVisible(false);
         cmbNomEmp = new javax.swing.JComboBox<>();
         cmbCodEmp = new javax.swing.JComboBox<>();
         l3 = new javax.swing.JLabel();
+        btnregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1023, 529));
@@ -189,13 +196,13 @@ rbtme.setVisible(false);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "codigo", "nombre", "Efecto"
+                "codigo", "nombre", "Clave", "Estado", "Empleado"
             }
         ));
         jScrollPane1.setViewportView(tabla);
@@ -241,6 +248,18 @@ rbtme.setVisible(false);
         l3.setToolTipText("");
         getContentPane().add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, 20));
 
+        btnregresar.setBackground(new java.awt.Color(255, 148, 42));
+        btnregresar.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(190, 243, 85));
+        btnregresar.setText("Regresar");
+        btnregresar.setMinimumSize(new java.awt.Dimension(763, 439));
+        btnregresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 410, 290, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,7 +303,7 @@ rbtme.setVisible(false);
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             stmtPrincipal,
             new String [] {
-                "Codigo", "Nombre","Efecto"
+               "Codigo", "Nombre","Contraseña","Empleado","Estado"
             }
         ));
     }//GEN-LAST:event_rbtviMouseClicked
@@ -296,7 +315,7 @@ rbtme.setVisible(false);
         if(rbtm.isSelected()){itEstado=2;}else{itEstado=1;}
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `usuario`(`us_codigo`, `us_nombre`, `us_clave`, `us_estadousuario`, `emp_codi`) VALUES ('"+(j1+1)+"','"+txtnom.getText().trim()+"','"+txtcontra.getText().trim()+"','"+itEstado+"','"+cmbCodEmp.getSelectedItem()+"');");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `usuario`(`us_codigo`, `us_nombre`, `us_clave`, `us_estadousuario`, `emp_codi`) VALUES ('"+j1+"','"+txtnom.getText().trim()+"','"+txtcontra.getText().trim()+"','"+itEstado+"','"+cmbCodEmp.getSelectedItem()+"');");
             pst.executeUpdate();
             txtnom.setText("");txtcontra.setText("");
             JOptionPane.showMessageDialog(null,"Dato guardado con exito");
@@ -378,6 +397,13 @@ rbtme.setVisible(false);
         }
     }//GEN-LAST:event_cmbNomEmpItemStateChanged
 
+    private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
+
+        menu pantalla=new menu();
+        pantalla.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnregresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -416,6 +442,7 @@ rbtme.setVisible(false);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnel;
     private javax.swing.JButton btnin;
+    private javax.swing.JButton btnregresar;
     private javax.swing.JButton btnvi;
     private javax.swing.JComboBox<String> cmbCod;
     private javax.swing.JComboBox<String> cmbCodEmp;

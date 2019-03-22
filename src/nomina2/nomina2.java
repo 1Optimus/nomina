@@ -2,7 +2,7 @@ package nomina2;
 
 import javax.swing.JOptionPane;
 /*
-*Ricardo Perez 1255 no tiene login ni base de datos
+*Ricardo Perez 1255 no tiene login ni base de datos, ya esta casi listo
 * ya estan subidos el del examen y el de la nomina con login y cronograma., modificaciones,ahora con mas jframes de ingreso, y nomina casi hecha
 */
 public class nomina2 extends javax.swing.JFrame {

@@ -18,6 +18,7 @@ public class gestion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupo = new javax.swing.ButtonGroup();
         jButton2 = new javax.swing.JButton();
         btnempleados = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -30,8 +31,8 @@ public class gestion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1920, 1000));
-        setPreferredSize(new java.awt.Dimension(1920, 950));
+        setMinimumSize(new java.awt.Dimension(1663, 726));
+        setPreferredSize(new java.awt.Dimension(1663, 726));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setBackground(new java.awt.Color(255, 148, 42));
@@ -43,7 +44,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 770, 450, 200));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 510, 390, 100));
 
         btnempleados.setBackground(new java.awt.Color(255, 148, 42));
         btnempleados.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -54,7 +55,7 @@ public class gestion extends javax.swing.JFrame {
                 btnempleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 450, 200));
+        getContentPane().add(btnempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 390, 100));
 
         jButton4.setBackground(new java.awt.Color(255, 148, 42));
         jButton4.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -65,7 +66,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 450, 200));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 390, 100));
 
         jButton5.setBackground(new java.awt.Color(255, 148, 42));
         jButton5.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -76,7 +77,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 190, 450, 200));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 390, 100));
 
         jButton6.setBackground(new java.awt.Color(255, 148, 42));
         jButton6.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -87,7 +88,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 470, 450, 200));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 390, 100));
 
         jButton7.setBackground(new java.awt.Color(255, 148, 42));
         jButton7.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -98,7 +99,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 770, 450, 200));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 390, 100));
 
         jButton8.setBackground(new java.awt.Color(255, 148, 42));
         jButton8.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -109,7 +110,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 470, 450, 200));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 360, 390, 100));
 
         jButton9.setBackground(new java.awt.Color(255, 148, 42));
         jButton9.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -120,7 +121,7 @@ public class gestion extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 770, 450, 200));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 510, 390, 100));
 
         jButton10.setBackground(new java.awt.Color(255, 148, 42));
         jButton10.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
@@ -131,11 +132,11 @@ public class gestion extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 180, 450, 200));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 180, 390, 100));
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 1, 48)); // NOI18N
         jLabel1.setText("Seleccione");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -155,7 +156,10 @@ public class gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnempleadosActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+    //mostrar la otra pantalla deseada
+        nominencabezado pantalla=new nominencabezado();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -166,7 +170,10 @@ public class gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+            //mostrar la otra pantalla deseada
+        nominadet pantalla=new nominadet();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -177,7 +184,10 @@ public class gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+         //mostrar la otra pantalla deseada
+        bancos pantalla=new bancos();
+        pantalla.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -231,6 +241,7 @@ public class gestion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnempleados;
+    private javax.swing.ButtonGroup grupo;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;

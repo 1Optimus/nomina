@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
  * @author Ricardo perez
  */
 public class bancos extends javax.swing.JFrame {
-int j1;
+int j1,j;
     String stmtPrincipal[][]=new String[15][3]; 
     public bancos() {
         initComponents();
@@ -31,16 +31,22 @@ bntmod.setVisible(false);
  public void codigoauto(){
         //codigo para saber cuantas lineas hay en la base de datos y asi poder llenar el codigo sin ingresar
         j1=0;
-          try {              
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+           try {
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="SELECT * FROM bancos";
+           String SQL="select count(*) from bancos";
            ResultSet rs=s.executeQuery(SQL);
-            boolean r=rs.next();
-            while(r){
-                j1=j1+1;
-                r=rs.next();            
-            }
+           String jo="";
+              if (rs.next()) {
+                  jo=rs.getString(1);
+                   j=Integer.parseInt(jo);
+                   if (j==0) {
+                      j1=1;
+                  }else{
+                  j1=j+1;
+              }
+
+              }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
         }
@@ -91,10 +97,11 @@ bntmod.setVisible(false);
         txtcuenta = new javax.swing.JTextField();
         rbtmod = new javax.swing.JRadioButton();
         bntmod = new javax.swing.JButton();
+        btnregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1023, 529));
-        setPreferredSize(new java.awt.Dimension(1023, 529));
+        setMinimumSize(new java.awt.Dimension(1107, 553));
+        setPreferredSize(new java.awt.Dimension(1107, 553));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rbtin.setText("Ingresar");
@@ -203,6 +210,18 @@ bntmod.setVisible(false);
         });
         getContentPane().add(bntmod, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 170, -1));
 
+        btnregresar.setBackground(new java.awt.Color(255, 148, 42));
+        btnregresar.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(190, 243, 85));
+        btnregresar.setText("Regresar");
+        btnregresar.setMinimumSize(new java.awt.Dimension(763, 439));
+        btnregresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 290, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -244,7 +263,7 @@ bntmod.setVisible(false);
         codigoauto();
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `bancos`(`ban_codigo`, `ban_nombre`, `ban_cuenta`) VALUES ('"+(j1+1)+"','"+txtnom.getText().trim()+"','"+txtcuenta.getText().trim()+"')");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `bancos`(`ban_codigo`, `ban_nombre`, `ban_cuenta`) VALUES ('"+j1+"','"+txtnom.getText().trim()+"','"+txtcuenta.getText().trim()+"')");
             pst.executeUpdate();
             txtnom.setText("");txtcuenta.setText("");
             JOptionPane.showMessageDialog(null,"Dato guardado con exito");
@@ -334,6 +353,13 @@ bntmod.setVisible(false);
         llenardatos();
     }//GEN-LAST:event_bntmodActionPerformed
 
+    private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
+
+        menu pantalla=new menu();
+        pantalla.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnregresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,6 +399,7 @@ bntmod.setVisible(false);
     private javax.swing.JButton bntmod;
     private javax.swing.JButton btnel;
     private javax.swing.JButton btnin;
+    private javax.swing.JButton btnregresar;
     private javax.swing.JButton btnvi;
     private javax.swing.JComboBox<String> cmbCod;
     private javax.swing.JComboBox<String> cmbNom;

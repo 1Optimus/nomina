@@ -9,9 +9,53 @@ public class nomina2 extends javax.swing.JFrame {
     int tam,j1,j;
     double dbTotal=0.0;
     String [][] matPrincipal= new String[25][10];
+    String []stDepto=new String[15];
     double [] vectTotal= new double[15];
     public nomina2() {
-        initComponents();               
+        initComponents();  
+        banco();
+        cmbBamCod.setVisible(false);
+    }
+        public int numerorandom(int n1,int n2){
+        //se optienen dos valores para retornar el random
+        int rmd;
+        rmd=n1+(int)(Math.random()*n2);
+        return rmd;
+    }
+    public void banco(){
+        int x=0;
+        this.cmbBamCod.removeAllItems();
+        this.cmbBamNom.removeAllItems();
+    try{//
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `bancos`;");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){                
+                cmbBamNom.addItem(rs.getString("ban_nombre")+" "+rs.getString("ban_cuenta"));
+                cmbBamCod.addItem(rs.getString("ban_codigo"));
+                r=rs.next();
+                x++;
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un Error fatal");
+        }
+    }
+    public void departamentos(){
+        int x=1;
+     try{//
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `departamentos`;");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){                
+                stDepto[x]=rs.getString("dep_nombre");                  
+                r=rs.next();
+                x++;
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un Error fatal");
+        }
     }
     public void codigoauto(){
       try {
@@ -52,29 +96,30 @@ public class nomina2 extends javax.swing.JFrame {
             }
         });
           //codigo utilizado para mostrar el vector de totales por departamentos
+            tbtotal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         tbtotal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {vectTotal[1]},
-                {vectTotal[2]},
-                {vectTotal[3]},
-                {vectTotal[4]},
-                {vectTotal[5]},
-                {vectTotal[6]},
-                {vectTotal[7]},
-                {vectTotal[8]},
-                {vectTotal[9]},
-                {vectTotal[10]},
-                {vectTotal[11]},
-                {vectTotal[12]},
-                {vectTotal[13]},
-                {vectTotal[14]}
+                 {stDepto[1],vectTotal[1]},
+                {stDepto[2],vectTotal[2]},
+                {stDepto[3],vectTotal[3]},
+                {stDepto[4],vectTotal[4]},
+                {stDepto[5],vectTotal[5]},
+                {stDepto[6],vectTotal[6]},
+                {stDepto[7],vectTotal[7]},
+                {stDepto[8],vectTotal[8]},
+                {stDepto[9],vectTotal[9]},
+                {stDepto[10],vectTotal[10]},
+                {stDepto[11],vectTotal[11]},
+                {stDepto[12],vectTotal[12]},
+                {stDepto[13],vectTotal[13]},
+                {stDepto[14],vectTotal[14]}
             },
             new String [] {
-                "Cantidad"
+                "Departamento", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -106,20 +151,20 @@ public class nomina2 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btninsertar = new javax.swing.JButton();
         btncalcular = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         btnlimpiar = new javax.swing.JButton();
         btnguar = new javax.swing.JButton();
-        txtff = new javax.swing.JTextField();
-        txtfi = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jdtini = new datechooser.beans.DateChooserPanel();
+        jdtfin = new datechooser.beans.DateChooserPanel();
+        btnregresar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cmbBamCod = new javax.swing.JComboBox<>();
+        cmbBamNom = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1402, 531));
+        setMinimumSize(new java.awt.Dimension(1535, 616));
+        setPreferredSize(new java.awt.Dimension(1535, 616));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -150,23 +195,23 @@ public class nomina2 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbprincipal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 1090, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 1090, 190));
 
         tbtotal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         tbtotal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Cantidad"
+                "Departamento", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,11 +220,11 @@ public class nomina2 extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbtotal);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 160, 110));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 260, 110));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Nomina");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 170, 60));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 170, 60));
 
         btninsertar.setBackground(new java.awt.Color(255, 148, 42));
         btninsertar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -190,7 +235,7 @@ public class nomina2 extends javax.swing.JFrame {
                 btninsertarActionPerformed(evt);
             }
         });
-        getContentPane().add(btninsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, -1));
+        getContentPane().add(btninsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
         btncalcular.setBackground(new java.awt.Color(255, 148, 42));
         btncalcular.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -202,22 +247,7 @@ public class nomina2 extends javax.swing.JFrame {
                 btncalcularActionPerformed(evt);
             }
         });
-        getContentPane().add(btncalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, -1, -1));
-
-        jLabel2.setText("consejeros");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
-
-        jLabel3.setText("Administracion");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-
-        jLabel4.setText("Contabilidad");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
-
-        jLabel5.setText("Sistemas");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
-
-        jLabel6.setText("Seguridad");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        getContentPane().add(btncalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
 
         btnlimpiar.setBackground(new java.awt.Color(255, 148, 42));
         btnlimpiar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -228,7 +258,7 @@ public class nomina2 extends javax.swing.JFrame {
                 btnlimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, -1, -1));
+        getContentPane().add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
 
         btnguar.setBackground(new java.awt.Color(255, 148, 42));
         btnguar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -239,17 +269,88 @@ public class nomina2 extends javax.swing.JFrame {
                 btnguarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnguar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 380, -1, -1));
-        getContentPane().add(txtff, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 460, 140, -1));
-        getContentPane().add(txtfi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 390, 140, -1));
+        getContentPane().add(btnguar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
         jLabel7.setText("Fecha  final");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 430, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 370, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
         jLabel8.setText("Fecha incio");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 360, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, -1));
 
-        pack();
+        jdtini.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
+            new datechooser.view.appearance.ViewAppearance("custom",
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(0, 0, 255),
+                    true,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 255),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(128, 128, 128),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.LabelPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.LabelPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(255, 0, 0),
+                    false,
+                    false,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                (datechooser.view.BackRenderer)null,
+                false,
+                true)));
+    getContentPane().add(jdtini, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, 390, 260));
+    getContentPane().add(jdtfin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 260, 390, 260));
+
+    btnregresar.setBackground(new java.awt.Color(255, 148, 42));
+    btnregresar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+    btnregresar.setForeground(new java.awt.Color(190, 243, 85));
+    btnregresar.setText("Regresar");
+    btnregresar.setMinimumSize(new java.awt.Dimension(763, 439));
+    btnregresar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnregresarActionPerformed(evt);
+        }
+    });
+    getContentPane().add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 290, 60));
+
+    jLabel2.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
+    jLabel2.setText("Banco");
+    getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 550, -1, -1));
+
+    cmbBamCod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    getContentPane().add(cmbBamCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 550, -1, -1));
+
+    cmbBamNom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    cmbBamNom.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            cmbBamNomItemStateChanged(evt);
+        }
+    });
+    getContentPane().add(cmbBamNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 550, 210, -1));
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btninsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertarActionPerformed
@@ -264,6 +365,7 @@ public class nomina2 extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
+                if(rs.getString("emp_estatus").equals("2")){
                 matPrincipal[x][0]=rs.getString("emp_codigo");
                 matPrincipal[x][1]=rs.getString("emp_nombre");
                 matPrincipal[x][2]=rs.getString("emp_sueldonom");
@@ -275,10 +377,13 @@ public class nomina2 extends javax.swing.JFrame {
                  }else{
                     dbIsr=(dbSalario*0.05)/12;
                  }
+                   matPrincipal[x][4]=String.valueOf(numerorandom(100,300));
+                   matPrincipal[x][5]=String.valueOf(numerorandom(200,300));
+                   matPrincipal[x][7]=String.valueOf(numerorandom(50,250));
                  matPrincipal[x][6]=String.valueOf(dbIsr);//se guarda el isr en la matriz
                  matPrincipal[x][9]=rs.getString("dep_cod");
-                r=rs.next();
-                x++;
+                 x++;}
+                r=rs.next();               
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal");
@@ -287,6 +392,7 @@ public class nomina2 extends javax.swing.JFrame {
             
         }       
          mostrarentabla();
+                 departamentos();
     }//GEN-LAST:event_btninsertarActionPerformed
 
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
@@ -305,7 +411,7 @@ public class nomina2 extends javax.swing.JFrame {
              }
           }
           //codigo para hacer las sumas de los totales y del vector de totales por departamento
-        for(int i=0;i<=3;i++){
+        for(int i=0;i<=24;i++){
             if(((String.valueOf(matPrincipal[i][0])).equals(""))||((String.valueOf(matPrincipal[i][0])).equals("null"))){
             }else{
             itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
@@ -360,12 +466,12 @@ public class nomina2 extends javax.swing.JFrame {
 
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         //se llama al metodo de limpiar tablas, lo cual borra las matrices y limpa la tabla
-        limpiar();
-        codigoauto();
+        limpiar();        
     }//GEN-LAST:event_btnlimpiarActionPerformed
 
     private void btnguarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguarActionPerformed
             codigoauto();
+            int itError=1;
             double dbTotales=0.0;
         for(int i=0;i<=14;i++){
           if(((String.valueOf(vectTotal[i])).equals(""))||((String.valueOf(vectTotal[i])).equals("null"))||((String.valueOf(vectTotal[i])).equals("0.0"))){
@@ -375,10 +481,9 @@ public class nomina2 extends javax.swing.JFrame {
         }
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominaencabezado` (`nomi_codigo`, `nomi_fechaini`, `nom_fechafin`, `nomi_monto`, `ban_codigo`) VALUES ('"+j1+"', '"+txtfi.getText().trim()+"', '"+txtff.getText().trim()+"', '"+dbTotales+"', '1');");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominaencabezado` (`nomi_codigo`, `nomi_fechaini`, `nom_fechafin`, `nomi_monto`, `ban_codigo`) VALUES ('"+j1+"', '"+jdtini.getSelection()+"', '"+jdtfin.getSelection()+"', '"+dbTotales+"', '"+cmbBamCod.getSelectedItem()+"');");
             pst.executeUpdate();
-            txtff.setText("");
-            txtfi.setText("");
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
@@ -388,56 +493,79 @@ public class nomina2 extends javax.swing.JFrame {
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '1', '"+(String.valueOf(matPrincipal[i][2]))+"');");
-            pst.executeUpdate();           
+            pst.executeUpdate(); 
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 1 "+e);
         }
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '6', '"+(String.valueOf(matPrincipal[i][3]))+"');");
-            pst.executeUpdate();           
+            pst.executeUpdate();  
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 2 "+e);
         }
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '2', '"+(String.valueOf(matPrincipal[i][4]))+"');");
-            pst.executeUpdate();            
+            pst.executeUpdate(); 
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 3 "+e);
         }
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '3', '"+(String.valueOf(matPrincipal[i][5]))+"');");
-            pst.executeUpdate();            
+            pst.executeUpdate(); 
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 4 "+e);
         }
          try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '4', '"+(String.valueOf(matPrincipal[i][6]))+"');");
-            pst.executeUpdate();            
+            pst.executeUpdate(); 
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 5 "+e);
         }
              try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '5', '"+(String.valueOf(matPrincipal[i][7]))+"');");
-            pst.executeUpdate();            
+            pst.executeUpdate(); 
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 6 "+e);
         }
               try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominadetalles` (`nomi_codigo`, `emp_codigo`, `con_codigo`, `nomi_total`) VALUES ('"+(j1)+"', '"+(String.valueOf(matPrincipal[i][0]))+"', '7', '"+(String.valueOf(matPrincipal[i][8]))+"');");
-            pst.executeUpdate();            
+            pst.executeUpdate();  
+            itError=2;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error 7 "+e);
         }
+             if(itError==1){
+             JOptionPane.showMessageDialog(null,"Guardado con exito");
+             }
              }             
              
         }
     }//GEN-LAST:event_btnguarActionPerformed
+
+    private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
+
+        menu pantalla=new menu();
+        pantalla.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnregresarActionPerformed
+
+    private void cmbBamNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbBamNomItemStateChanged
+                try{ cmbBamCod.setSelectedIndex(cmbBamNom.getSelectedIndex());}
+        catch(Exception e){
+        }
+    }//GEN-LAST:event_cmbBamNomItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -479,19 +607,18 @@ public class nomina2 extends javax.swing.JFrame {
     private javax.swing.JButton btnguar;
     private javax.swing.JButton btninsertar;
     private javax.swing.JButton btnlimpiar;
+    private javax.swing.JButton btnregresar;
+    private javax.swing.JComboBox<String> cmbBamCod;
+    private javax.swing.JComboBox<String> cmbBamNom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private datechooser.beans.DateChooserPanel jdtfin;
+    private datechooser.beans.DateChooserPanel jdtini;
     private javax.swing.JTable tbprincipal;
     private javax.swing.JTable tbtotal;
-    private javax.swing.JTextField txtff;
-    private javax.swing.JTextField txtfi;
     // End of variables declaration//GEN-END:variables
 }

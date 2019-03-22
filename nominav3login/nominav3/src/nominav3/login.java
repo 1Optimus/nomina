@@ -90,13 +90,10 @@ public class login extends javax.swing.JFrame {
                 stEstado=(rs.getString("us_estadousuario"));
                 stContra=(rs.getString("us_clave"));
             }
-            if(stContra.equals(txtContra.getText())){
-                //verificacion de estado de usuario y tambien codigo para cambiar de pantalla
-                if(stEstado.equals("2")){
+            if((stContra.equals(txtContra.getText())&&(stEstado.equals("2")))){
                     menu pantalla=new menu();
                     pantalla.setVisible(true);
                     dispose();
-                }
             }else{
                 //se muestra el error
                 lblError.setVisible(true);

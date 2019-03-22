@@ -4,29 +4,9 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Ricardo perez
- *  try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            Connection con=DriverManager.getConnection(""+l+"","root"," ");
-            Statement s=con.createStatement();
-           String SQL="select count(*) from TELEFONO";
-           ResultSet rs=s.executeQuery(SQL);
-           String jo="";
-              if (rs.next()) {
-                  jo=rs.getString(1);
-                   j=Integer.parseInt(jo);
-                   if (j==0) {
-                      j1=1;
-                  }else{
-                  j1=j+1;
-              }
-
-              }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
-        }
  */
 public class concepto extends javax.swing.JFrame {
-int j1;
+int j1,j;
     String stmtPrincipal[][]=new String[15][3];  
     public concepto() {
         initComponents();
@@ -51,16 +31,22 @@ rbtme.setVisible(false);
  public void codigoauto(){
         //codigo para saber cuantas lineas hay en la base de datos y asi poder llenar el codigo sin ingresar
         j1=0;
-          try {              
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+           try {
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="SELECT * FROM concepto";
+           String SQL="select count(*) from concepto";
            ResultSet rs=s.executeQuery(SQL);
-            boolean r=rs.next();
-            while(r){
-                j1=j1+1;
-                r=rs.next();            
-            }
+           String jo="";
+              if (rs.next()) {
+                  jo=rs.getString(1);
+                   j=Integer.parseInt(jo);
+                   if (j==0) {
+                      j1=1;
+                  }else{
+                  j1=j+1;
+              }
+
+              }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
         }
@@ -110,6 +96,7 @@ rbtme.setVisible(false);
         btnvi = new javax.swing.JButton();
         rbtme = new javax.swing.JRadioButton();
         rbtm = new javax.swing.JRadioButton();
+        btnregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1109, 573));
@@ -212,6 +199,18 @@ rbtme.setVisible(false);
         rbtm.setText("Más");
         getContentPane().add(rbtm, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, -1));
 
+        btnregresar.setBackground(new java.awt.Color(255, 148, 42));
+        btnregresar.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(190, 243, 85));
+        btnregresar.setText("Regresar");
+        btnregresar.setMinimumSize(new java.awt.Dimension(763, 439));
+        btnregresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 420, 290, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -255,7 +254,7 @@ rbtme.setVisible(false);
         if(rbtm.isSelected()){itEfecto=2;}else{itEfecto=1;}
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `concepto` (`con_codigo`, `con_nombre`,`con_efecto`) VALUES ('"+(j1+1)+"', '"+txtnom.getText().trim()+"','"+itEfecto+"');");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `concepto` (`con_codigo`, `con_nombre`,`con_efecto`) VALUES ('"+j1+"', '"+txtnom.getText().trim()+"','"+itEfecto+"');");
             pst.executeUpdate();
             txtnom.setText("");
             JOptionPane.showMessageDialog(null,"Dato guardado con exito");
@@ -325,6 +324,13 @@ rbtme.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtmeMouseClicked
 
+    private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
+
+        menu pantalla=new menu();
+        pantalla.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnregresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,6 +369,7 @@ rbtme.setVisible(false);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnel;
     private javax.swing.JButton btnin;
+    private javax.swing.JButton btnregresar;
     private javax.swing.JButton btnvi;
     private javax.swing.JComboBox<String> cmbCod;
     private javax.swing.JComboBox<String> cmbNom;

@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class empleados extends javax.swing.JFrame {
     //creacion de variables y matrices necesarias para poder manejar los datos, 
     String stmtPrincipal[][]=new String[25][8];
-    int j1;String stCod="";
+    int j1,j;String stCod="";
     public empleados() {
         initComponents();
         grupo1.add(rbtingresar);
@@ -32,16 +32,22 @@ public class empleados extends javax.swing.JFrame {
     public void codigoauto(){
         //codigo para saber cuantas lineas hay en la base de datos y asi poder llenar el codigo sin ingresar
         j1=0;
-          try {              
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
+        try {
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="SELECT * FROM empleados";
+           String SQL="select count(*) from empleados";
            ResultSet rs=s.executeQuery(SQL);
-            boolean r=rs.next();
-            while(r){
-                j1=j1+1;
-                r=rs.next();            
-            }
+           String jo="";
+              if (rs.next()) {
+                  jo=rs.getString(1);
+                   j=Integer.parseInt(jo);
+                   if (j==0) {
+                      j1=1;
+                  }else{
+                  j1=j+1;
+              }
+
+              }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Conexión erronea"+e);
         }
@@ -100,10 +106,7 @@ public class empleados extends javax.swing.JFrame {
         cmbNomPue.setVisible(true);
         chkestado.setVisible(true);
         btnIngresar.setVisible(true);
-        
-                cmbCodDep.setVisible(true);
-        cmbCodpue.setVisible(true);
-    
+   
     }
         public void Nomostrar(){
         jScrollPane1.setVisible(false);
@@ -169,6 +172,7 @@ public class empleados extends javax.swing.JFrame {
         btnlistado = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1920, 950));
@@ -314,7 +318,7 @@ public class empleados extends javax.swing.JFrame {
                 btnbusActionPerformed(evt);
             }
         });
-        getContentPane().add(btnbus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 290, 60));
+        getContentPane().add(btnbus, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, 290, 60));
 
         cod.setFont(new java.awt.Font("Ebrima", 0, 24)); // NOI18N
         cod.setText("Ingrese codigo");
@@ -330,7 +334,7 @@ public class empleados extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 770, 290, 60));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 730, 290, 60));
 
         btnlistado.setBackground(new java.awt.Color(255, 148, 42));
         btnlistado.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
@@ -359,11 +363,23 @@ public class empleados extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 1610, 230));
 
+        btnregresar.setBackground(new java.awt.Color(255, 148, 42));
+        btnregresar.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(190, 243, 85));
+        btnregresar.setText("Regresar");
+        btnregresar.setMinimumSize(new java.awt.Dimension(763, 439));
+        btnregresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 690, 290, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-           //Codigo que permite insertar registros en al base de datos
+               //Codigo que permite insertar registros en al base de datos
            codigoauto();
            int itEstado=0;
            if(chkestado.isSelected()==true){
@@ -371,12 +387,13 @@ public class empleados extends javax.swing.JFrame {
            }else{itEstado=1;}
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `empleados` (`emp_codigo`, `emp_nombre`, `emp_nit`, `emp_direccion`, `dep_cod`, `pues_codi`, `emp_sueldonom`, `emp_estatus`) VALUES ('"+(1+j1)+"', '"+txtnombre.getText()+"', '"+txtnit.getText()+"', '"+txtdirec.getText()+"', '"+cmbCodDep.getSelectedItem()+"', '"+cmbCodpue.getSelectedItem()+"', '"+txtsueldo.getText()+"', '"+itEstado+"');");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `empleados` (`emp_codigo`, `emp_nombre`, `emp_nit`, `emp_direccion`, `dep_cod`, `pues_codi`, `emp_sueldonom`, `emp_estatus`) VALUES ('"+j1+"', '"+txtnombre.getText()+"', '"+txtnit.getText()+"', '"+txtdirec.getText()+"', '"+cmbCodDep.getSelectedItem()+"', '"+cmbCodpue.getSelectedItem()+"', '"+txtsueldo.getText()+"', '"+itEstado+"');");
             pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Dato guardado con exito");
         }catch (Exception e){
            System.out.println("le dio un error"+e);
         }
-               
+             limpiar();  
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void rbtingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtingresarActionPerformed
@@ -441,7 +458,7 @@ public class empleados extends javax.swing.JFrame {
         }catch (Exception e){
             System.out.println("le dio un Error fatal");
         }
-        
+        btnModificar.setVisible(true);
     }//GEN-LAST:event_btnbusActionPerformed
 
     private void rbtmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtmodificarActionPerformed
@@ -452,7 +469,7 @@ public class empleados extends javax.swing.JFrame {
         
         Nomostrar();cod.setVisible(true);
         txtCod.setVisible(true);
-        btnbus.setVisible(true);
+        btnbus.setVisible(true);        
 
     }//GEN-LAST:event_rbtmodificarMouseClicked
 
@@ -470,6 +487,7 @@ public class empleados extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"le dio un Error fatal");
         }
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void rbtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtbuscarActionPerformed
@@ -527,6 +545,13 @@ public class empleados extends javax.swing.JFrame {
     cmbNomDep.setSelectedIndex(0);
     }//GEN-LAST:event_rbtbuscarMouseClicked
 
+    private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
+        
+        menu pantalla=new menu();
+                    pantalla.setVisible(true);
+                    dispose();
+    }//GEN-LAST:event_btnregresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -567,6 +592,7 @@ public class empleados extends javax.swing.JFrame {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnbus;
     private javax.swing.JButton btnlistado;
+    private javax.swing.JButton btnregresar;
     private javax.swing.JCheckBox chkestado;
     private javax.swing.JComboBox<String> cmbCodDep;
     private javax.swing.JComboBox<String> cmbCodpue;
