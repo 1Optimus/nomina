@@ -11,14 +11,14 @@ public class nominencabezado extends javax.swing.JFrame {
     String stmtPrincipal[][] = new String[15][3];
     public nominencabezado() {
         initComponents();
-        grupo.add(rbtmod);
+        grupo.add(rbtmod);//enlaze de mos radiobuttons
         grupo.add(rbtvi);
-        llenardatos();
+        llenardatos();//llamda de metodos necesarios
         nomostrar();
     }
 
     public void nomostrar() {
-        cmbNom.setVisible(false);
+        cmbNom.setVisible(false);//se ocultan todos los objetos
         cmbNomBan.setVisible(false);
         cmbCod.setVisible(false);
         cmbCodBan.setVisible(false);
@@ -61,6 +61,7 @@ public class nominencabezado extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             boolean r = rs.next();
             while (r) {
+                //se ingresan los datos en los combos
                 this.cmbNomBan.addItem(rs.getString("ban_nombre"));
                 this.cmbCodBan.addItem(rs.getString("ban_codigo"));
                 r = rs.next();
@@ -222,7 +223,7 @@ public class nominencabezado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         jScrollPane1.setVisible(true);
         btnvi.setVisible(true);
         for (int i = 0; i <= 14; i++) {
@@ -240,7 +241,7 @@ public class nominencabezado extends javax.swing.JFrame {
 
     private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
         try {
-            cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());
+            cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());// se cambia el indice del combo
         } catch (Exception e) {
         }
     }//GEN-LAST:event_cmbNomItemStateChanged
@@ -282,7 +283,7 @@ public class nominencabezado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnviActionPerformed
 
     private void rbtmodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtmodMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         llenardatos();
         cmbNom.setVisible(true);
         cmbNomBan.setVisible(true);
@@ -309,7 +310,7 @@ public class nominencabezado extends javax.swing.JFrame {
     }//GEN-LAST:event_bntmodActionPerformed
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-
+        //se va hacia otra pantalla
         menu pantalla = new menu();
         pantalla.setVisible(true);
         dispose();
@@ -317,7 +318,7 @@ public class nominencabezado extends javax.swing.JFrame {
 
     private void cmbNomBanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomBanItemStateChanged
             try {
-            cmbCodBan.setSelectedIndex(cmbNomBan.getSelectedIndex());
+            cmbCodBan.setSelectedIndex(cmbNomBan.getSelectedIndex());// se cambia el indice del combo
         } catch (Exception e) {
         }
         

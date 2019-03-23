@@ -23,10 +23,11 @@ public class nomina2 extends javax.swing.JFrame {
         return rmd;
     }
     public void banco(){
+        // se obtienen los datos para ingresarlos a los combos
         int x=0;
         this.cmbBamCod.removeAllItems();
         this.cmbBamNom.removeAllItems();
-    try{//
+    try{//obtencion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `bancos`;");
             ResultSet rs = pst.executeQuery();
@@ -42,6 +43,7 @@ public class nomina2 extends javax.swing.JFrame {
         }
     }
     public void departamentos(){
+        // se obtienen los datos para ingresarlos a los combos
         int x=1;
      try{//
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
@@ -58,6 +60,7 @@ public class nomina2 extends javax.swing.JFrame {
         }
     }
     public void codigoauto(){
+        //se obtiene el mayor dato para sumarle uno y poder ingresar uno nuevo
       try {
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
@@ -79,7 +82,7 @@ public class nomina2 extends javax.swing.JFrame {
         }
     }
      public void mostrarentabla(){
-         //codigo utilizado para mostrar los datos en la tabla
+         //codigo utilizado para mostrar los datos en la tabla,
         tbprincipal.setFont(new java.awt.Font("Dialog", 1, 18)); 
         tbprincipal.setModel(new javax.swing.table.DefaultTableModel(
             matPrincipal,
@@ -195,7 +198,7 @@ public class nomina2 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbprincipal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 1090, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 1090, 190));
 
         tbtotal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         tbtotal.setModel(new javax.swing.table.DefaultTableModel(
@@ -388,9 +391,6 @@ public class nomina2 extends javax.swing.JFrame {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal");
         }
-        for(int i=0;i<=9;i++){ 
-            
-        }       
          mostrarentabla();
                  departamentos();
     }//GEN-LAST:event_btninsertarActionPerformed
@@ -416,6 +416,7 @@ public class nomina2 extends javax.swing.JFrame {
             }else{
             itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
             matPrincipal[i][8]=String.valueOf(itTotal);
+            //suma de los datos por vectores
             if(Integer.parseInt(matPrincipal[i][9])==1){
                 vectTotal[1]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[1]);
             }
@@ -458,6 +459,7 @@ public class nomina2 extends javax.swing.JFrame {
             if(Integer.parseInt(matPrincipal[i][9])==14){
                 vectTotal[14]=(double)(Double.parseDouble(matPrincipal[i][8])+vectTotal[4]);
             }
+            //suma de todo, para un total
             dbTotal=itTotal+dbTotal;
         }}
       mostrarentabla();              
@@ -467,18 +469,20 @@ public class nomina2 extends javax.swing.JFrame {
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         //se llama al metodo de limpiar tablas, lo cual borra las matrices y limpa la tabla
         limpiar();        
+        codigoauto();
+        
     }//GEN-LAST:event_btnlimpiarActionPerformed
 
     private void btnguarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguarActionPerformed
-            codigoauto();
+            codigoauto();//codigo para ver cual es el ultimo codigo ingresado
             int itError=1;
             double dbTotales=0.0;
-        for(int i=0;i<=14;i++){
+        for(int i=0;i<=14;i++){//verificacion que no este vacio
           if(((String.valueOf(vectTotal[i])).equals(""))||((String.valueOf(vectTotal[i])).equals("null"))||((String.valueOf(vectTotal[i])).equals("0.0"))){
             }else{   
-              dbTotales=dbTotales+vectTotal[i];
+              dbTotales=dbTotales+vectTotal[i];//suma de totales
           }
-        }
+        }//todas las consultas par aguardar en nomina de talle
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `nominaencabezado` (`nomi_codigo`, `nomi_fechaini`, `nom_fechafin`, `nomi_monto`, `ban_codigo`) VALUES ('"+j1+"', '"+jdtini.getSelection()+"', '"+jdtfin.getSelection()+"', '"+dbTotales+"', '"+cmbBamCod.getSelectedItem()+"');");
@@ -555,7 +559,7 @@ public class nomina2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnguarActionPerformed
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-
+        //se muestra otra pantalla
         menu pantalla=new menu();
         pantalla.setVisible(true);
         dispose();

@@ -13,7 +13,8 @@ public class nominadet extends javax.swing.JFrame {
     double [] vectTotal= new double[15];
     public nominadet() {
         initComponents();
-        grupo.add(rbtmod);grupo.add(rbtvis);
+        grupo.add(rbtmod);grupo.add(rbtvis);//enlaze de mos radiobuttons
+        //llamda de metodos necesarios
         nomostrar();
         llenardatos();
     }
@@ -67,6 +68,7 @@ public class nominadet extends javax.swing.JFrame {
         });
 }
     public void nomostrar(){
+        //se ocultan todos los objetos
     l1.setVisible(false);l3.setVisible(false);
     l2.setVisible(false);l4.setVisible(false);
     cmbCodFec.setVisible(false);cmbNomFec.setVisible(false);
@@ -77,7 +79,7 @@ public class nominadet extends javax.swing.JFrame {
     }
     public void llenardatos(){
         int x=0;
-       //Codigo que permite ingresar datos a los listas
+       //Codigo que permite ingresar datos a los listas, o combocox, todos hacen lo mismo
       this.cmbCodFec.removeAllItems();
       this.cmbNomFec.removeAllItems();
       this.cmbCodEmp.removeAllItems();
@@ -127,7 +129,7 @@ public class nominadet extends javax.swing.JFrame {
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Base de datos no enlazada");
-        }
+        }x=1;
         try{//
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `departamentos`;");
@@ -173,6 +175,7 @@ public class nominadet extends javax.swing.JFrame {
         btnvis = new javax.swing.JButton();
         jsTabla = new javax.swing.JScrollPane();
         tbtotal = new javax.swing.JTable();
+        btnregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 619));
@@ -334,11 +337,23 @@ public class nominadet extends javax.swing.JFrame {
 
         getContentPane().add(jsTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 250, 160));
 
+        btnregresar.setBackground(new java.awt.Color(255, 148, 42));
+        btnregresar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(190, 243, 85));
+        btnregresar.setText("Regresar");
+        btnregresar.setMinimumSize(new java.awt.Dimension(763, 439));
+        btnregresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 440, 290, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtmodActionPerformed
-        nomostrar();    
+        nomostrar();    //se ocultan todos y solo se muestran los que se quieren
         l1.setVisible(true);l3.setVisible(true);
     l2.setVisible(true);l4.setVisible(true);
     cmbNomFec.setVisible(true);
@@ -349,7 +364,7 @@ public class nominadet extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtmodActionPerformed
 
     private void cmbNomFecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomFecActionPerformed
-             try{ cmbCodFec.setSelectedIndex(cmbNomFec.getSelectedIndex());}
+             try{ cmbCodFec.setSelectedIndex(cmbNomFec.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomFecActionPerformed
@@ -359,23 +374,23 @@ public class nominadet extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbNomEmpActionPerformed
 
     private void cmbNomFecItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomFecItemStateChanged
-                 try{ cmbCodFec.setSelectedIndex(cmbNomFec.getSelectedIndex());}
+                 try{ cmbCodFec.setSelectedIndex(cmbNomFec.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomFecItemStateChanged
 
     private void cmbNomEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomEmpItemStateChanged
-             try{ cmbCodEmp.setSelectedIndex(cmbNomEmp.getSelectedIndex());}
+             try{ cmbCodEmp.setSelectedIndex(cmbNomEmp.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomEmpItemStateChanged
 
     private void cmbNomConItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomConItemStateChanged
-             try{ cmbCodCon.setSelectedIndex(cmbNomCon.getSelectedIndex());}
+             try{ cmbCodCon.setSelectedIndex(cmbNomCon.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
               try{
-            //conexion de datos
+            //conexion de datos llena el campo de monto al seleccionar 
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT `nomi_total` FROM `nominadetalles` WHERE nominadetalles.nomi_codigo='"+cmbCodFec.getSelectedItem()+"' AND nominadetalles.emp_codigo='"+cmbCodEmp.getSelectedItem()+"' AND nominadetalles.con_codigo='"+cmbCodCon.getSelectedItem()+"'  ");
             ResultSet rs = pst.executeQuery();
@@ -412,7 +427,7 @@ public class nominadet extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtvisItemStateChanged
 
     private void rbtvisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtvisMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         jstabla.setVisible(true);
         btnvis.setVisible(true);
         l1.setVisible(true);jsTabla.setVisible(true);
@@ -420,17 +435,17 @@ public class nominadet extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtvisMouseClicked
 
     private void btnvisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvisActionPerformed
- for(int i=0;i<=24;i++){
+ for(int i=0;i<=24;i++){///se limpia la matriz
             for(int j=0;j<=9;j++){
                 matPrincipal[i][j]="";
             }
         }
          for(int i=0;i<=14;i++){
-            vectTotal[i]=0;
+            vectTotal[i]=0;//se limpia la matriz
         }   
         int x=0,j=0,j1=0,y=2,w=1;
         Double itTotal;
-      try {
+      try {//se obtiene la cantidad de elementos en concepto
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
            String SQL="select count(*) from concepto ";
@@ -451,13 +466,14 @@ public class nominadet extends javax.swing.JFrame {
         }
               x=0;
             j1=j1-1;
-        try{
+        try{//se obrtienen los datos en la matriz
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT nominadetalles.nomi_codigo, nominadetalles.emp_codigo, nominadetalles.con_codigo, nominadetalles.nomi_total, empleados.emp_nombre, empleados.dep_cod FROM `nominadetalles`, empleados WHERE nominadetalles.emp_codigo=empleados.emp_codigo AND   nomi_codigo='"+cmbCodFec.getSelectedItem()+"'");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){                
                 if(w<=j1){
+                    //se ingresan en la matriz
                 matPrincipal[x][y]=rs.getString("nomi_total");
                 matPrincipal[x][0]=rs.getString("emp_codigo");
                 matPrincipal[x][1]=rs.getString("emp_nombre");
@@ -472,8 +488,8 @@ public class nominadet extends javax.swing.JFrame {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal");
         }  
-                for(int i=0;i<=24;i++){
-            if(((String.valueOf(matPrincipal[i][0])).equals(""))||((String.valueOf(matPrincipal[i][0])).equals("null"))){
+                for(int i=0;i<=24;i++){//se suman hacia los vectores, para luego ser mostrados
+            if(((String.valueOf(matPrincipal[i][0])).equals(""))||((String.valueOf(matPrincipal[i][0])).equals("null"))){//verificacion que no esten vacios
             }else{
             itTotal=(Double.parseDouble(matPrincipal[i][2]))-(Double.parseDouble(matPrincipal[i][3]))+(Double.parseDouble(matPrincipal[i][4]))+(Double.parseDouble(matPrincipal[i][5]))-(Double.parseDouble(matPrincipal[i][6]))-(Double.parseDouble(matPrincipal[i][7]));
             matPrincipal[i][8]=String.valueOf(itTotal);
@@ -523,6 +539,13 @@ public class nominadet extends javax.swing.JFrame {
         mostrarentabla();
     }//GEN-LAST:event_btnvisActionPerformed
 
+    private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
+        //se regresa de pantalla
+        menu pantalla=new menu();
+        pantalla.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnregresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -560,6 +583,7 @@ public class nominadet extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnmod;
+    private javax.swing.JButton btnregresar;
     private javax.swing.JButton btnvis;
     private javax.swing.JComboBox<String> cmbCodCon;
     private javax.swing.JComboBox<String> cmbCodEmp;

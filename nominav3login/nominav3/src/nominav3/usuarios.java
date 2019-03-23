@@ -10,14 +10,15 @@ int j1,j;
     String stmtPrincipal[][]=new String[15][5];  
     public usuarios() {
          initComponents();
-        grupo.add(rbtel);
+        grupo.add(rbtel);//enlaze de mos radiobuttons
         grupo2.add(rbtm);grupo2.add(rbtme);
         grupo.add(rbtvi);grupo.add(rbtin);
         nomostrar();
-        codigoauto();
+        codigoauto();//llamda de metodos necesarios
         llenardatos();
     }
 public void nomostrar(){
+    //se ocultan todos los objetos
 cmbNom.setVisible(false);
 cmbNomEmp.setVisible(false);
 cmbCodEmp.setVisible(false);
@@ -155,7 +156,7 @@ rbtme.setVisible(false);
         });
         getContentPane().add(rbtvi, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, -1));
 
-        jLabel1.setText("Concepto");
+        jLabel1.setText("Usuarios");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
 
         btnin.setText("Ingresar");
@@ -264,7 +265,7 @@ rbtme.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtinMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
     cmbNomEmp.setVisible(true);
     txtcontra.setVisible(true);
     l2.setVisible(true);
@@ -277,7 +278,7 @@ rbtme.setVisible(false);
     }//GEN-LAST:event_rbtinMouseClicked
 
     private void rbtelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtelMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         llenardatos();
     cmbNomEmp.setVisible(true);
     txtcontra.setVisible(true);
@@ -292,7 +293,7 @@ rbtme.setVisible(false);
     }//GEN-LAST:event_rbtelMouseClicked
 
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         jScrollPane1.setVisible(true);
         btnvi.setVisible(true);
         for(int i=0;i<=14;i++){
@@ -325,7 +326,7 @@ rbtme.setVisible(false);
     }//GEN-LAST:event_btninActionPerformed
 
     private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
-        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
+        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomItemStateChanged
@@ -392,13 +393,13 @@ rbtme.setVisible(false);
     }//GEN-LAST:event_rbtmeMouseClicked
 
     private void cmbNomEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomEmpItemStateChanged
-          try{ cmbCodEmp.setSelectedIndex(cmbNomEmp.getSelectedIndex());}
+          try{ cmbCodEmp.setSelectedIndex(cmbNomEmp.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomEmpItemStateChanged
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-
+//se va hacia al menu
         menu pantalla=new menu();
         pantalla.setVisible(true);
         dispose();

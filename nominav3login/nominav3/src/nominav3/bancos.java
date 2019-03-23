@@ -10,12 +10,15 @@ int j1,j;
     String stmtPrincipal[][]=new String[15][3]; 
     public bancos() {
         initComponents();
+       //enlaze de mos radiobuttons
         grupo.add(rbtel);grupo.add(rbtmod);
         grupo.add(rbtvi);grupo.add(rbtin);
+        //llamda de metodos necesarios
         nomostrar();
         llenardatos();
     }
 public void nomostrar(){
+    //se ocultan todos los objetos
 cmbNom.setVisible(false);
 cmbCod.setVisible(false);
 txtnom.setVisible(false);
@@ -34,6 +37,7 @@ bntmod.setVisible(false);
            try {
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
+            //cuenta los registros en la base de datos
            String SQL="select count(*) from bancos";
            ResultSet rs=s.executeQuery(SQL);
            String jo="";
@@ -56,17 +60,19 @@ bntmod.setVisible(false);
       this.cmbCod.removeAllItems();
       this.cmbNom.removeAllItems();
         try{
-            //conexion de datos
+            //conexion de datos y obtencion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM bancos");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
+                //ingreso a los combobox los datos
                 this.cmbNom.addItem(rs.getString("ban_nombre"));
                 this.cmbCod.addItem(rs.getString("ban_codigo"));
                 r=rs.next();            
             }
         }catch (Exception e){
+            //mensaje de error
             JOptionPane.showMessageDialog(null,"Base de datos no enlazada");
         }
  }
@@ -227,6 +233,7 @@ bntmod.setVisible(false);
 
     private void rbtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtinMouseClicked
         nomostrar();
+        //se ocultan todos y solo se muestran los que se quieren
         txtnom.setVisible(true);
         l1.setVisible(true);
         btnin.setVisible(true);
@@ -234,6 +241,7 @@ bntmod.setVisible(false);
     }//GEN-LAST:event_rbtinMouseClicked
 
     private void rbtelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtelMouseClicked
+        //se ocultan todos y solo se muestran los que se quieren
         nomostrar();
         llenardatos();
         cmbNom.setVisible(true);
@@ -242,6 +250,7 @@ bntmod.setVisible(false);
     }//GEN-LAST:event_rbtelMouseClicked
 
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
+        //se ocultan todos y solo se muestran los que se quieren, aparte se limpia la matriz y se vuelve a mostrar en tabla
         nomostrar();
         jScrollPane1.setVisible(true);
         btnvi.setVisible(true);
@@ -259,17 +268,23 @@ bntmod.setVisible(false);
     }//GEN-LAST:event_rbtviMouseClicked
 
     private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
-        //codigos para guardar el nuevo dato en la tabla departamentos
-        codigoauto();
+    if((txtnom.getText().equals("")||(txtcuenta.getText().equals("")))){//verificacion de que los campos esten llenos
+        JOptionPane.showMessageDialog(null,"no ah completado los datos");//mensaje de no llenado de datos
+    }else{
+//codigos para guardar el nuevo dato en la tabla departamentos
+        codigoauto();//codigo para tomar el ultimo numero de ingreso para poder ingresar uno nuevo
         try{
+            //codigo de gestion de ingreso a la base de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `bancos`(`ban_codigo`, `ban_nombre`, `ban_cuenta`) VALUES ('"+j1+"','"+txtnom.getText().trim()+"','"+txtcuenta.getText().trim()+"')");
             pst.executeUpdate();
+            //se borran los textos para que no tengan nada despues
             txtnom.setText("");txtcuenta.setText("");
             JOptionPane.showMessageDialog(null,"Dato guardado con exito");
         }catch (Exception e){
+            //mensaje de error
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
+        }}
     }//GEN-LAST:event_btninActionPerformed
 
     private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
@@ -283,6 +298,7 @@ bntmod.setVisible(false);
     }//GEN-LAST:event_cmbNomActionPerformed
 
     private void btnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelActionPerformed
+      
         //codigos para elimiar el dato en la tabla departamentos
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
@@ -300,11 +316,14 @@ bntmod.setVisible(false);
         //Codigo que permite consultar registros en la base de datos
         int itEfecto,x=0,itEstado;//variable para la matriz
         try{
+            //se obtienen los datos 
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `bancos`;");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
+                
+                //se ingresan en la matriz
                 stmtPrincipal[x][0]=rs.getString("ban_codigo");
                 stmtPrincipal[x][1]=rs.getString("ban_nombre");
                 stmtPrincipal[x][2]=rs.getString("ban_cuenta");
@@ -320,7 +339,7 @@ bntmod.setVisible(false);
             new String [] {
                 "Codigo", "Nombre","No. cuenta"
             }
-        ));
+        ));// se limpia la matriz
         for(int i=0;i<=14;i++){
             for(int y=0;y<=2;y++){
                 stmtPrincipal[i][y]="";
@@ -329,6 +348,7 @@ bntmod.setVisible(false);
     }//GEN-LAST:event_btnviActionPerformed
 
     private void rbtmodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtmodMouseClicked
+                //se ocultan todos y solo se muestran los que se quieren
         nomostrar();
         llenardatos();
         txtnom.setVisible(true);
@@ -339,18 +359,22 @@ bntmod.setVisible(false);
     }//GEN-LAST:event_rbtmodMouseClicked
 
     private void bntmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntmodActionPerformed
-         //codigos para guardar el nuevo dato en la tabla departamentos
+          if((txtnom.getText().equals("")||(txtcuenta.getText().equals("")))){//verificacion de que los campos esten llenos
+        JOptionPane.showMessageDialog(null,"no ah completado los datos");//mensaje de no llenado de datos
+    }else{
+//codigos para guardar el nuevo dato en la tabla departamentos
         codigoauto();
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             PreparedStatement pst = cn.prepareStatement(" UPDATE `bancos` SET `ban_nombre`='"+txtnom.getText().trim()+"',`ban_cuenta`='"+txtcuenta.getText().trim()+"' WHERE ban_codigo='"+cmbCod.getSelectedItem()+"'");
             pst.executeUpdate();
-            txtnom.setText("");txtcuenta.setText("");
+            txtnom.setText("");txtcuenta.setText("");//se limpian los datos
             JOptionPane.showMessageDialog(null,"Dato guardado con exito");
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }       
         llenardatos();
+          }
     }//GEN-LAST:event_bntmodActionPerformed
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed

@@ -13,14 +13,17 @@ public class empleados extends javax.swing.JFrame {
     int j1,j;String stCod="";
     public empleados() {
         initComponents();
+        //enlaze de mos radiobuttons
         grupo1.add(rbtingresar);
         grupo1.add(rbtmodificar);       
         grupo1.add(rbtbuscar);
+        //llamda de metodos necesarios
         Nomostrar();
         llenarpuesto();
         llenardepto();
     }
     public void limpiar(){
+        //limpia todo los datos
          txtnombre.setText("");
         txtdirec.setText("");
         txtsueldo.setText("");
@@ -35,7 +38,7 @@ public class empleados extends javax.swing.JFrame {
         try {
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
-           String SQL="select count(*) from empleados";
+           String SQL="SELECT COUNT(*) FROM `empleados`";
            ResultSet rs=s.executeQuery(SQL);
            String jo="";
               if (rs.next()) {
@@ -91,6 +94,7 @@ public class empleados extends javax.swing.JFrame {
         }
     }
     public void Mostrar(){
+        //se muestran todos los objetos
         ln.setVisible(true);
         lp.setVisible(true);
         lnit.setVisible(true);
@@ -403,19 +407,20 @@ public class empleados extends javax.swing.JFrame {
     private void rbtingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtingresarMouseClicked
         Nomostrar();
         Mostrar();
+        //se ocultan todos y solo se muestran los que se quieren
          cod.setVisible(false);
         txtCod.setVisible(false);
         btnbus.setVisible(false);
     }//GEN-LAST:event_rbtingresarMouseClicked
 
     private void cmbNomPueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomPueItemStateChanged
-        try{ cmbCodpue.setSelectedIndex(cmbNomPue.getSelectedIndex());}
+        try{ cmbCodpue.setSelectedIndex(cmbNomPue.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomPueItemStateChanged
 
     private void cmbNomDepItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomDepItemStateChanged
-        try{ cmbCodDep.setSelectedIndex(cmbNomDep.getSelectedIndex());}
+        try{ cmbCodDep.setSelectedIndex(cmbNomDep.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomDepItemStateChanged
@@ -466,7 +471,7 @@ public class empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtmodificarActionPerformed
 
     private void rbtmodificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtmodificarMouseClicked
-        
+        //se ocultan todos y solo se muestran los que se quieren
         Nomostrar();cod.setVisible(true);
         txtCod.setVisible(true);
         btnbus.setVisible(true);        
@@ -507,6 +512,7 @@ public class empleados extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();            
              boolean r=rs.next();
                 while(r){
+                    //se ingresan a la matriz
                    stmtPrincipal[x][0]=rs.getString("emp_codigo");
                    stmtPrincipal[x][1]=rs.getString("emp_nombre");
                    stmtPrincipal[x][2]=rs.getString("emp_nit");
@@ -537,7 +543,8 @@ public class empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnlistadoActionPerformed
 
     private void rbtbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtbuscarMouseClicked
-   Nomostrar();
+   //se ocultan todos y solo se muestran los que se quieren
+        Nomostrar();
     jScrollPane1.setVisible(true);
     ldep.setVisible(true);
     btnlistado.setVisible(true);
@@ -546,7 +553,7 @@ public class empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtbuscarMouseClicked
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-        
+        //se cambia de pantalla
         menu pantalla=new menu();
                     pantalla.setVisible(true);
                     dispose();

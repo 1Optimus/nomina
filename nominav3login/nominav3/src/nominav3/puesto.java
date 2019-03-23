@@ -11,13 +11,13 @@ int j1,j;
     String stmtPrincipal[][]=new String[15][2];
     public puesto() {
          initComponents();
-        grupo.add(rbtel);
+        grupo.add(rbtel);//enlaze de mos radiobuttons
         grupo.add(rbtvi);grupo.add(rbtin);
-        nomostrar();
+        nomostrar();//llamda de metodos necesarios
         llenardatos();
     }
 public void nomostrar(){
-cmbNom.setVisible(false);
+cmbNom.setVisible(false);//se ocultan todos los objetos
 cmbCod.setVisible(false);
 txtnom.setVisible(false);
 l1.setVisible(false);
@@ -59,7 +59,7 @@ jScrollPane1.setVisible(false);
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM puesto");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
-            while(r){
+            while(r){//se ingresan a los combobox
                 this.cmbNom.addItem(rs.getString("pues_nombre"));
                 this.cmbCod.addItem(rs.getString("pues_codigo"));
                 r=rs.next();            
@@ -199,14 +199,14 @@ jScrollPane1.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtinMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         txtnom.setVisible(true);
         l1.setVisible(true);
         btnin.setVisible(true);
     }//GEN-LAST:event_rbtinMouseClicked
 
     private void rbtelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtelMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         llenardatos();
         cmbNom.setVisible(true);
         btnel.setVisible(true);
@@ -215,7 +215,7 @@ jScrollPane1.setVisible(false);
     }//GEN-LAST:event_rbtelMouseClicked
 
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
-        nomostrar();
+        nomostrar();//se ocultan todos y solo se muestran los que se quieren
         jScrollPane1.setVisible(true);
         btnvi.setVisible(true);
          for(int i=0;i<=14;i++){
@@ -247,7 +247,7 @@ jScrollPane1.setVisible(false);
     }//GEN-LAST:event_btninActionPerformed
 
     private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
-        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
+        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomItemStateChanged
@@ -292,7 +292,7 @@ jScrollPane1.setVisible(false);
             new String [] {
                 "Codigo", "Nombre"
             }
-        ));
+        ));//se limpia la matriz
         for(int i=0;i<=14;i++){
             for(int y=0;y<=1;y++){
                 stmtPrincipal[i][y]="";
@@ -301,7 +301,7 @@ jScrollPane1.setVisible(false);
     }//GEN-LAST:event_btnviActionPerformed
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-
+//se regresa al menu
         menu pantalla=new menu();
         pantalla.setVisible(true);
         dispose();

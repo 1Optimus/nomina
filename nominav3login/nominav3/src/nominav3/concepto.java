@@ -10,20 +10,21 @@ int j1,j;
     String stmtPrincipal[][]=new String[15][3];  
     public concepto() {
         initComponents();
-        grupo.add(rbtel);
+         //enlaze de mos radiobuttons        
         grupo2.add(rbtm);grupo2.add(rbtme);
         grupo.add(rbtvi);grupo.add(rbtin);
+        //llamda de metodos necesarios
         nomostrar();
         llenardatos();
     }
 public void nomostrar(){
+    //se ocultan todos los objetos
 cmbNom.setVisible(false);
 cmbCod.setVisible(false);
 txtnom.setVisible(false);
 l1.setVisible(false);
 btnin.setVisible(false);
 btnvi.setVisible(false);
-btnel.setVisible(false);
 jScrollPane1.setVisible(false);
 rbtm.setVisible(false);
 rbtme.setVisible(false);
@@ -34,6 +35,7 @@ rbtme.setVisible(false);
            try {
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
             Statement s=con.createStatement();
+            //cuenta los registros en la base de datos
            String SQL="select count(*) from concepto";
            ResultSet rs=s.executeQuery(SQL);
            String jo="";
@@ -61,7 +63,7 @@ rbtme.setVisible(false);
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM concepto");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
-            while(r){
+            while(r){//se ingresan a los combos
                 this.cmbNom.addItem(rs.getString("con_nombre"));
                 this.cmbCod.addItem(rs.getString("con_codigo"));
                 r=rs.next();            
@@ -82,7 +84,6 @@ rbtme.setVisible(false);
         grupo = new javax.swing.ButtonGroup();
         grupo2 = new javax.swing.ButtonGroup();
         rbtin = new javax.swing.JRadioButton();
-        rbtel = new javax.swing.JRadioButton();
         rbtvi = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         btnin = new javax.swing.JButton();
@@ -90,7 +91,6 @@ rbtme.setVisible(false);
         l1 = new javax.swing.JLabel();
         cmbCod = new javax.swing.JComboBox<>();
         cmbNom = new javax.swing.JComboBox<>();
-        btnel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnvi = new javax.swing.JButton();
@@ -110,14 +110,6 @@ rbtme.setVisible(false);
         });
         getContentPane().add(rbtin, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
 
-        rbtel.setText("Eliminar");
-        rbtel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbtelMouseClicked(evt);
-            }
-        });
-        getContentPane().add(rbtel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
-
         rbtvi.setText("Visualizar");
         rbtvi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,7 +127,7 @@ rbtme.setVisible(false);
                 btninActionPerformed(evt);
             }
         });
-        getContentPane().add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 170, -1));
+        getContentPane().add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 170, -1));
         getContentPane().add(txtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 170, -1));
 
         l1.setText("Nombre");
@@ -156,14 +148,6 @@ rbtme.setVisible(false);
             }
         });
         getContentPane().add(cmbNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 170, -1));
-
-        btnel.setText("Eliminar");
-        btnel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnelActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 170, -1));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -215,6 +199,7 @@ rbtme.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtinMouseClicked
+        //se ocultan todos y solo se muestran los que se quieren
         nomostrar();
         txtnom.setVisible(true);
         l1.setVisible(true);
@@ -222,15 +207,8 @@ rbtme.setVisible(false);
         rbtm.setVisible(true);rbtme.setVisible(true);
     }//GEN-LAST:event_rbtinMouseClicked
 
-    private void rbtelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtelMouseClicked
-        nomostrar();
-        llenardatos();
-        cmbNom.setVisible(true);
-        btnel.setVisible(true);
-        l1.setVisible(true);       
-    }//GEN-LAST:event_rbtelMouseClicked
-
     private void rbtviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtviMouseClicked
+        //se ocultan todos y solo se muestran los que se quieren, se limpia la matriz y se muestra
         nomostrar();
         jScrollPane1.setVisible(true);
         btnvi.setVisible(true);
@@ -248,7 +226,10 @@ rbtme.setVisible(false);
     }//GEN-LAST:event_rbtviMouseClicked
 
     private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
-        //codigos para guardar el nuevo dato en la tabla departamentos
+  if((txtnom.getText().equals(""))){//verificacion de que los campos esten llenos
+        JOptionPane.showMessageDialog(null,"no ah completado los datos");//mensaje de no llenado de datos
+    }else{        
+//codigos para guardar el nuevo dato en la tabla departamentos
         codigoauto();
         int itEfecto=0;
         if(rbtm.isSelected()){itEfecto=2;}else{itEfecto=1;}
@@ -261,10 +242,11 @@ rbtme.setVisible(false);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
+  }
     }//GEN-LAST:event_btninActionPerformed
 
     private void cmbNomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNomItemStateChanged
-        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}
+        try{ cmbCod.setSelectedIndex(cmbNom.getSelectedIndex());}// se cambia el indice del combo
         catch(Exception e){
         }
     }//GEN-LAST:event_cmbNomItemStateChanged
@@ -272,19 +254,6 @@ rbtme.setVisible(false);
     private void cmbNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbNomActionPerformed
-
-    private void btnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelActionPerformed
-        //codigos para elimiar el dato en la tabla departamentos
-        try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/umg", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `concepto` WHERE con_codigo='"+cmbCod.getSelectedItem()+"'");
-            pst.executeUpdate();
-            cmbNom.setSelectedIndex(0);
-            JOptionPane.showMessageDialog(null,"Dato eliminado con exito");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
-    }//GEN-LAST:event_btnelActionPerformed
 
     private void btnviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviActionPerformed
         //Codigo que permite consultar registros en la base de datos
@@ -325,7 +294,6 @@ rbtme.setVisible(false);
     }//GEN-LAST:event_rbtmeMouseClicked
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-
         menu pantalla=new menu();
         pantalla.setVisible(true);
         dispose();
@@ -367,7 +335,6 @@ rbtme.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnel;
     private javax.swing.JButton btnin;
     private javax.swing.JButton btnregresar;
     private javax.swing.JButton btnvi;
@@ -378,7 +345,6 @@ rbtme.setVisible(false);
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel l1;
-    private javax.swing.JRadioButton rbtel;
     private javax.swing.JRadioButton rbtin;
     private javax.swing.JRadioButton rbtm;
     private javax.swing.JRadioButton rbtme;
