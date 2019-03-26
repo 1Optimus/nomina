@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ListasEnlazadas;
-
+import javax.swing.JOptionPane;
 /**
- *
- * @author EDUARDO
+ *  Ricardo Perez   1255
  */
 public class Inicio {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         ListasEnlazadas miLista=new ListasEnlazadas();
 	miLista.InsertarEnPrimero(10);
@@ -23,11 +13,11 @@ public class Inicio {
 	miLista.InsertarEnPrimero(40);
 	miLista.InsertarEnPrimero(60);
 	System.out.println(miLista.Listar());
-	System.out.println("borrar");
-	miLista.borrarUltimo();
-        miLista.borrarPrimero();
-	
-	System.out.println(miLista.Listar());
+	System.out.println("---------------------------------------------------");
+        System.out.println("La posicion de 10 es: "+miLista.localizarPosicion(10));//muestra en que posicion se encuntra el dato 10
+        miLista.borrarPosicion(3);//borra el dato de la posicion 3
+        System.out.println("Resultado:  "+miLista.borrarDato(40));//borra el dato que es iguala 40        
+	System.out.println(miLista.Listar());//muestra la lista ya modificada
 // TODO code application logic here
     }
     

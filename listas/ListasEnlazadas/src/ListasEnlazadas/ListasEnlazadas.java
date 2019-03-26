@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ListasEnlazadas;
-
-/**
- *
- * @author EDUARDO
- */
 public class ListasEnlazadas
 {
     	Nodo Primero;
@@ -75,5 +65,48 @@ public class ListasEnlazadas
 			anterior.Siguiente=actual.Siguiente;
 		}
 	}
+        public String localizarPosicion(int dato)//enseña la posicion en la que se encuentra tal dato
+	{
+		int Dato=0, Error=0;
+                String Dat="";
+		Nodo aux=Primero;
+		while (aux!=null)
+		{
+                    if(dato==aux.info){
+                    aux=null;
+                    Dat=String.valueOf(Dato);
+                    Error=5;
+                    }else{
+                    Dato++;
+                    aux=aux.Siguiente;
+                    } 
+                    if((aux==null)&&(Error==0)){// si no llegara a existir tal dato
+                    Dat="No esta en la lista";
+                    }
+		}
+		return(Dat);
+	}
+        public String borrarDato(int dato)//borra de la lista el dato que se ingreso
+	{
+		Nodo anterior=Primero;
+		Nodo actual=Primero;
+                int Error=0;
+                String dat="Dato eliminado con exito";
+			while (actual.Siguiente != null)
+			{
+                            if(actual.info==dato){
+                                Error=2;
+                           break;
+                            }else{
+				anterior=actual;
+				actual=actual.Siguiente; 
+                            }
+			}			
+                        if(Error==0){//si no llegara a existir tal dato a eliminar
+                        dat="Dato no existente";
+                        }else{anterior.Siguiente=actual.Siguiente;}
+                  return(dat);
+	}
+        
 
 }
