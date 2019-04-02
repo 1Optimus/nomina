@@ -2,8 +2,8 @@ package nomina2;
 
 import javax.swing.JOptionPane;
 /*
-*Ricardo Perez 1255 no tiene login ni base de datos, ya esta casi listo, ya casi todo
-* listas ya finalizado
+*Ricardo Perez 1255 
+* ahora ya esta el de las listas con herencia
 */
 public class nomina2 extends javax.swing.JFrame {
     /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
