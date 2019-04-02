@@ -3,7 +3,7 @@ package nomina2;
 import javax.swing.JOptionPane;
 /*
 *Ricardo Perez 1255 
-* ahora ya esta el de las listas con herencia
+* ya listo con lo de las listas de libros 
 */
 public class nomina2 extends javax.swing.JFrame {
     /*declaracion de todas mas matris a usarse, inlcuido matriz de totales

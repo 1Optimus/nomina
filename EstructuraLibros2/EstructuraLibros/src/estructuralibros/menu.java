@@ -18,18 +18,18 @@ public class menu {
                 case 1:
                      stAuto=(JOptionPane.showInputDialog("ingrese el autor"));stTitulo=(JOptionPane.showInputDialog("ingrese el titulo"));//se obtienen los datos en variables
                         stIsbn=(JOptionPane.showInputDialog("ingrese el isbn"));
-                     ls.insertarPrincipio(new Libro(stAuto,stTitulo,stIsbn));        //se envia a listas con los datos para guardarlos                                                                 
+                     ls.insertarPrincipio(new Libro(stTitulo,stAuto,stIsbn));        //se envia a listas con los datos para guardarlos                                                                 
                 break;
                 case 2:
                   stAuto=(JOptionPane.showInputDialog("ingrese el autor"));stTitulo=(JOptionPane.showInputDialog("ingrese el titulo"));//se obtienen los datos en variables
                         stIsbn=(JOptionPane.showInputDialog("ingrese el isbn"));
-                     ls.insertarFinal(new Libro(stAuto,stTitulo,stIsbn));            //se envia a listas con los datos para guardarlos         
+                     ls.insertarFinal(new Libro(stTitulo,stAuto,stIsbn));             //se envia a listas con los datos para guardarlos         
                 break;
                 case 3:   
                     stAuto=(JOptionPane.showInputDialog("ingrese el autor"));stTitulo=(JOptionPane.showInputDialog("ingrese el titulo"));//se obtienen los datos en variables
                         stIsbn=(JOptionPane.showInputDialog("ingrese el isbn"));
                       itDato=Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero del cual despues ingresar"));
-                      ls.insertarDespues(itDato,new Libro(stAuto,stTitulo,stIsbn));//se envia a listas con los datos para guardarlos
+                      ls.insertarDespues(itDato,new Libro(stTitulo,stAuto,stIsbn));   //se envia a listas con los datos para guardarlos
                 break;
                 case 4:
                      itDato=Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero del dato a obtener"));
@@ -47,7 +47,7 @@ public class menu {
                     JOptionPane.showMessageDialog(null,"Primero eliminado");// elimina el primero, con el metodo
                 break;
                 case 8:
-                     ls.eliminaPrincipio();
+                     ls.eliminarUltimo();
                     JOptionPane.showMessageDialog(null,"Ultimo eliminado");//elimina el utlimo con el metodo
                 break;
                 case 9:

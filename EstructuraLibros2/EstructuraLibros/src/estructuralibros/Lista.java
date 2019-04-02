@@ -1,4 +1,7 @@
 package estructuralibros;
+
+import javax.swing.JOptionPane;
+
 /**
  * @author Ricardo Perez 1255
  */
@@ -77,7 +80,7 @@ public class Lista {
             if (cabeza!=null){
                 //el nodo primero obtiene la direccion de cabeza, para luego darsela al del siguiente
                 Nodo primer = cabeza;
-                cabeza=cabeza.siguiente=null;
+                cabeza=cabeza.siguiente;
                 longitud--;//se elimina uno del tamanio total
             }
         }
@@ -124,7 +127,7 @@ public class Lista {
 		Nodo aux=cabeza;                
 		while (aux!=null)
 		{                       //hasta que encuentre null no va a parar y guardar los datos en esa variable          
-			Dato+="{" + aux.libro.getAutor()+"   "+ aux.libro.getTitulo()+"   "+ aux.libro.getIsbn()+"}\n";
+			Dato+="Autor: " + aux.libro.getAutor()+"\t\tTitulo: "+ aux.libro.getTitulo()+"\t\tISBN: "+ aux.libro.getIsbn()+"\n";
 			aux=aux.siguiente;
 		}
 		return(Dato);//regresa lo que tiene la variabel
