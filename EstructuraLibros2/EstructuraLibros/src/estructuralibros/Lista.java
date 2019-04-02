@@ -74,7 +74,7 @@ public class Lista {
 		return longitud;//envia la variable longitud, que contiene la cantidad
 	}
         public boolean estaVacia() {
-            return cabeza==null;//hace el primero null, asi borrando todo
+            return cabeza==null;//regresa datos si no regresa es por que esta vacia
         }
         public void eliminaPrincipio() {
             if (cabeza!=null){
@@ -132,5 +132,9 @@ public class Lista {
 		}
 		return(Dato);//regresa lo que tiene la variabel
 	}
+                 public void Vaciar() {
+             cabeza.siguiente=null;//regresa datos si no regresa es por que esta vacia
+             cabeza=null;
+        }
         
 }

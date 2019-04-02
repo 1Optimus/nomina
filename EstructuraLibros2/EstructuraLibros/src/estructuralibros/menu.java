@@ -11,8 +11,8 @@ public class menu {
            Lista ls=new Lista(); 
          do{//menu
         stOp=JOptionPane.showInputDialog("Seleccione una opcion:\n"+"1) insertar al principio\n2) insertar al final"+
-         "\n3) insertar despues de n\n4) obtener informacion"+"\n5) cantidad de datos en la lista\n6) vaciar"+"\n7) Eliminar el primero \n8) elimminar ultimo"+
-          "\n9) Eliminar el n numero \n10) visualizar\n0) para salir ingrese 0");
+         "\n3) insertar despues de n\n4) obtener informacion"+"\n5) cantidad de datos en la lista\n6) ver si esta vacia"+"\n7) Eliminar el primero \n8) elimminar ultimo"+
+          "\n9) Eliminar el n numero \n10) visualizar\n11) vaciar\n0) para salir ingrese 0");
         itOp=Integer.parseInt(stOp);//obtencion de menu a int
         switch(itOp){//cada uno de los casos propuestos en el menu
                 case 1:
@@ -39,8 +39,7 @@ public class menu {
                     JOptionPane.showMessageDialog(null,"La cantidad en la lista es: "+ls.contar());//se pide que regrese la cantidad
                 break;
                 case 6:
-                    ls.estaVacia();
-                    JOptionPane.showMessageDialog(null,"lista vaciada");//ejecuta el void, para eliminar todos
+                    JOptionPane.showMessageDialog(null,""+ls.estaVacia());//ejecuta el void, para eliminar todos
                 break;
                 case 7:
                       ls.eliminaPrincipio();
@@ -57,6 +56,10 @@ public class menu {
                 break;
                 case 10:
                     ls.visualizar();//se llama al metodo para mostrar
+                break;
+                 case 11:
+                    ls.Vaciar();//se llama para vaciar
+                    JOptionPane.showMessageDialog(null,"Datos eliminados");
                 break;
                  case 0:
                 break;
