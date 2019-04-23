@@ -3,7 +3,7 @@ package nomina2;
 import javax.swing.JOptionPane;
 /*
 *Ricardo Perez 1255 
-* ya listo con lo de las listas de libros y subido a youtube
+* ya esta parte de pilas
 */
 public class nomina2 extends javax.swing.JFrame {
     /*declaracion de todas mas matris a usarse, inlcuido matriz de totales
