@@ -1,15 +1,15 @@
 package pilas;
-
 import javax.swing.JOptionPane;
-
+//aca se encuentran todos los metodos los caules son las opciones del programa
 public class Nodo {
+    //declaracion de nodos y variable de longitud
     private nodo cabeza=null;
 	private int longitud=0;
 	private class nodo {
             //se declaran variables locales y un puntador
 		public Libro libro;
 		public nodo siguiente=null;
-		public nodo(Libro libro) {//se obtiene el dato enviado en variable local
+		public nodo(Libro libro) {//se obtiene el y se guarda en variable local
 			this.libro=libro;
 		}
 	}
@@ -49,7 +49,7 @@ public class Nodo {
                     //regresa que ya lo hizo y hace null este nodo
                     cabeza=null;  
                     longitud--;
-                } else {
+                } else {//de lo contrario busca el ultimo
                     nodo puntero=cabeza;
                     while (puntero.siguiente.siguiente!=null) {                    
                         puntero=puntero.siguiente;//encuentra el ultimo nodo y hace que el anterior apunto a null
@@ -73,8 +73,7 @@ public class Nodo {
 		}}
 		return(Dato);//regresa lo que tiene la variabel
 	}
-                 public void Vaciar() {
-             cabeza.siguiente=null;//vacia toda la lista, haciendo el primero nulo
+                 public void Vaciar() { //hace que cabeza apunte a null para eliminar la lista             
              cabeza=null;
         }
 }

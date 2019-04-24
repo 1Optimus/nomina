@@ -13,19 +13,19 @@ public class Libro {
 	public String getTitulo() {//se envia el dato pedido
 		return titulo;
 	}
-	public void setTitulo(String titulo) {//el dato enviadose guarda en la variable local
+	public void setTitulo(String titulo) {//el dato se recibe y se guarda en una variable local
 		this.titulo=titulo;  
 	}
 	public String getAutor() {//se envia el dato pedido
 		return autor;	
 	}
-	public void setAutor(String autor) {//el dato enviadose guarda en la variable local
+	public void setAutor(String autor) {//el dato se recibe y se guarda en una variable local
 		this.autor=autor;
 	}
 	public String getIsbn() {//se envia el dato pedido
 		return isbn;
 	}
-	public void setIsbn(String isbn) {//el dato enviadose guarda en la variable local
+	public void setIsbn(String isbn) {//el dato se recibe y se guarda en una variable local
 		this.isbn=isbn;
 	}
 }
