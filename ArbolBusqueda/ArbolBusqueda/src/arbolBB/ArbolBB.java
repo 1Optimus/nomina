@@ -22,6 +22,8 @@ public class ArbolBB {
 
     public ArbolBB() {
         raiz = null;
+        num_nodos=0;
+        alt=0;
     }
     
     public boolean agregar(int dato) {

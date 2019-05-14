@@ -1,10 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package arbolBB;
-
-
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -14,29 +8,21 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author
+ * @ricardo perez 1255
  */
 public class Vistaa extends javax.swing.JFrame {
 
     private SimuladorArbolBinario simulador = new SimuladorArbolBinario();
-
-    /**
-     * Creates new form Vista
-     */
+    int itProv[][]= new int[1][2];
     public Vistaa() {
         initComponents();
         this.inicializar(false);
-
-
     }
-
     private void inicializar(boolean enable) {
         this.InOrden.setEnabled(enable);
         this.PostOrden.setEnabled(enable);
         this.PreOrden.setEnabled(enable);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,13 +42,12 @@ public class Vistaa extends javax.swing.JFrame {
         PreOrden = new javax.swing.JButton();
         PostOrden = new javax.swing.JButton();
         txtdato = new javax.swing.JTextField();
-        btnequi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panel de Pruebas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panel de Pruebas", 0, 0, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
         jPanel2.setOpaque(false);
 
         jScrollPane1.setOpaque(false);
@@ -130,13 +115,6 @@ public class Vistaa extends javax.swing.JFrame {
             }
         });
 
-        btnequi.setText("Equilibrar");
-        btnequi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnequiActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -161,10 +139,6 @@ public class Vistaa extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 70, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(302, 302, 302)
-                .addComponent(btnequi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,9 +157,7 @@ public class Vistaa extends javax.swing.JFrame {
                             .addComponent(PreOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PostOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(btnequi)
-                .addGap(19, 19, 19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,10 +171,10 @@ public class Vistaa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,14 +220,6 @@ public class Vistaa extends javax.swing.JFrame {
         this.impresion.setText("");
         this.impresion.setText(recorrido);
     }//GEN-LAST:event_PostOrdenActionPerformed
-
-    private void btnequiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnequiActionPerformed
-      ArbolBB re= new ArbolBB();
-      String altura="";
-      altura=String.valueOf(re.getAltura());
-      JOptionPane.showMessageDialog(null, altura);
-     
-    }//GEN-LAST:event_btnequiActionPerformed
 
     public void complementos(){
         this.repintarArbol();
@@ -312,7 +276,6 @@ public class Vistaa extends javax.swing.JFrame {
     private javax.swing.JButton PostOrden;
     private javax.swing.JButton PreOrden;
     private javax.swing.JButton botonInsertar;
-    private javax.swing.JButton btnequi;
     private javax.swing.JTextArea impresion;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame2;

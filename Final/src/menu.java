@@ -21,6 +21,7 @@ public class menu extends javax.swing.JFrame {
        stNomi[4][1]="https://github.com/1Optimus/nomina/tree/master/Pilas";stNomi[4][2]="https://www.youtube.com/watch?v=SJBPyGH_ark";stNomi[4][3]="";
        stNomi[5][1]="https://github.com/1Optimus/nomina/tree/master/Colas";stNomi[5][2]="https://www.youtube.com/watch?v=eqcnbVLAHBQ";stNomi[5][3]="";
        stNomi[6][1]="https://github.com/1Optimus/nomina/tree/master/Torreshanoi";stNomi[6][2]="https://www.youtube.com/watch?v=3bTOUSrndnk&t=74s";stNomi[6][3]="";
+       stNomi[7][1]="https://github.com/1Optimus/nomina/tree/master/ArbolBusqueda/ArbolBusqueda";stNomi[7][2]="https://youtu.be/Ng4EWNnQMkc";stNomi[7][3]="";
     }
     public void desaparecer(){
     lblgit.setVisible(false);
@@ -119,7 +120,7 @@ public void abrirlinks(int x, int y){
         btnnomina.setBackground(new java.awt.Color(212, 94, 28));
         btnnomina.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btnnomina.setText("Nomina");
-        btnnomina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnnomina.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btnnomina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnominaActionPerformed(evt);
@@ -130,7 +131,7 @@ public void abrirlinks(int x, int y){
         btnpilas.setBackground(new java.awt.Color(212, 94, 28));
         btnpilas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btnpilas.setText("Pilas");
-        btnpilas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnpilas.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btnpilas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnpilasActionPerformed(evt);
@@ -141,7 +142,7 @@ public void abrirlinks(int x, int y){
         btncolas.setBackground(new java.awt.Color(212, 94, 28));
         btncolas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btncolas.setText("Colas");
-        btncolas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btncolas.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btncolas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncolasActionPerformed(evt);
@@ -152,7 +153,7 @@ public void abrirlinks(int x, int y){
         btnlistas.setBackground(new java.awt.Color(212, 94, 28));
         btnlistas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btnlistas.setText("Listas");
-        btnlistas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnlistas.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btnlistas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlistasActionPerformed(evt);
@@ -163,7 +164,7 @@ public void abrirlinks(int x, int y){
         btnnominabd.setBackground(new java.awt.Color(212, 94, 28));
         btnnominabd.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btnnominabd.setText("Nomina BD");
-        btnnominabd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnnominabd.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btnnominabd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnominabdActionPerformed(evt);
@@ -174,7 +175,7 @@ public void abrirlinks(int x, int y){
         btnarboles.setBackground(new java.awt.Color(212, 94, 28));
         btnarboles.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btnarboles.setText("Arboles");
-        btnarboles.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnarboles.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btnarboles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnarbolesActionPerformed(evt);
@@ -185,7 +186,7 @@ public void abrirlinks(int x, int y){
         btntorres.setBackground(new java.awt.Color(212, 94, 28));
         btntorres.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         btntorres.setText("Torres de hanoi");
-        btntorres.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btntorres.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btntorres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btntorresActionPerformed(evt);
@@ -217,7 +218,7 @@ public void abrirlinks(int x, int y){
 
         btncod.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         btncod.setText("Ver codigo");
-        btncod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btncod.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btncod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncodActionPerformed(evt);
@@ -227,7 +228,7 @@ public void abrirlinks(int x, int y){
 
         btnyout.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         btnyout.setText("Ver video");
-        btnyout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnyout.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btnyout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnyoutActionPerformed(evt);
@@ -237,7 +238,7 @@ public void abrirlinks(int x, int y){
 
         btngit.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         btngit.setText("Ver repositorio");
-        btngit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btngit.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         btngit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btngitActionPerformed(evt);
@@ -253,7 +254,7 @@ public void abrirlinks(int x, int y){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpp, javax.swing.GroupLayout.DEFAULT_SIZE, 1567, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
