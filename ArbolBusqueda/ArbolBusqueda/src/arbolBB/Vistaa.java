@@ -1,28 +1,40 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package arbolBB;
+
+
 import java.awt.BorderLayout;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 /**
- * @ricardo perez 1255
+ *
+ * @author
  */
 public class Vistaa extends javax.swing.JFrame {
 
     private SimuladorArbolBinario simulador = new SimuladorArbolBinario();
-    int itProv[][]= new int[1][2];
+
+    /**
+     * Creates new form Vista
+     */
     public Vistaa() {
         initComponents();
         this.inicializar(false);
+
+
     }
+
     private void inicializar(boolean enable) {
         this.InOrden.setEnabled(enable);
         this.PostOrden.setEnabled(enable);
         this.PreOrden.setEnabled(enable);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +59,7 @@ public class Vistaa extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panel de Pruebas", 0, 0, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panel de Pruebas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
         jPanel2.setOpaque(false);
 
         jScrollPane1.setOpaque(false);
@@ -157,7 +169,7 @@ public class Vistaa extends javax.swing.JFrame {
                             .addComponent(PreOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PostOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,26 +183,20 @@ public class Vistaa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
-        try {
             int dato = Integer.parseInt(txtdato.getText());
             if (this.simulador.insertar(dato)) {                
-                this.inicializar(true);
-                
+                this.inicializar(true);             
                 complementos();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);
-
         }
     }//GEN-LAST:event_botonInsertarActionPerformed
 
