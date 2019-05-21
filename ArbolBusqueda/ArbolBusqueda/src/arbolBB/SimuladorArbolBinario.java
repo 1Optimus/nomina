@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author
+* @ricardo perez 1255
  */
 public class SimuladorArbolBinario {
 
@@ -15,7 +15,7 @@ public class SimuladorArbolBinario {
 
     public SimuladorArbolBinario() {
     }
-
+    //metodo donde se inserta el nuevo dato ingresado
     public boolean insertar(Integer dato) {
         return (this.miArbol.insertar(dato));
     }
@@ -37,11 +37,11 @@ public class SimuladorArbolBinario {
     
     //metodo para poder mostrar los tipos d recorrido
     private String recorrido(LinkedList it, String msg) {
-        int i = 0;
+        int itI = 0;
         String r = msg + "\n";
-        while (i < it.size()) {
-            r += "\t" + it.get(i).toString() + "";
-            i++;
+        while (itI < it.size()) {
+            r += "\t" + it.get(itI).toString() + "";
+            itI++;
         }
         return (r);
     }

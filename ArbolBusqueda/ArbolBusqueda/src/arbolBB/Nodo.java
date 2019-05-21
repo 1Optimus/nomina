@@ -1,47 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package arbolBB;
 
 /**
- *
- * @author
+* @ricardo perez 1255
  */
 public class Nodo {
-    public int dato, qe;
-    public Nodo izq,der;
+    public int itDato, itFactroE;
+    public Nodo ndIzq,itDer;
 
     public Nodo(int dato, Nodo izq, Nodo der) {
-        this.dato = dato;
-        this.izq = izq;
-        this.der = der;
-        this.qe=0;
+        this.itDato = dato;
+        this.ndIzq = izq;
+        this.itDer = der;
+        this.itFactroE=0;
     }
-
+// aca se encuentran todo los constructores, los cambios y obtencion de datos
     public int getDato() {
-        return dato;
+        return itDato;
     }
 
     public void setDato(int dato) {
-        this.dato = dato;
+        this.itDato = dato;
     }
 
     public Nodo getIzq() {
-        return izq;
+        return ndIzq;
     }
 
     public void setIzq(Nodo izq) {
-        this.izq = izq;
+        this.ndIzq = izq;
     }
 
     public Nodo getDer() {
-        return der;
+        return itDer;
     }
 
     public void setDer(Nodo der) {
-        this.der = der;
+        this.itDer = der;
     }
  
 }

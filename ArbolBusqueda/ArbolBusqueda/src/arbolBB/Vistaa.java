@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package arbolBB;
 
 
@@ -16,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author
  */
 public class Vistaa extends javax.swing.JFrame {
-
+    //variable de clase simulador arbol binario
     private SimuladorArbolBinario simulador = new SimuladorArbolBinario();
 
     /**
@@ -28,7 +24,7 @@ public class Vistaa extends javax.swing.JFrame {
 
 
     }
-
+    //abilita los botones de muestreo
     private void inicializar(boolean enable) {
         this.InOrden.setEnabled(enable);
         this.PostOrden.setEnabled(enable);
@@ -193,7 +189,8 @@ public class Vistaa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
-            int dato = Integer.parseInt(txtdato.getText());
+        //obteine el dato, y lo envia a ingresar, ademas llama el metodo de pintar cada vez que ingrese uno    
+        int dato = Integer.parseInt(txtdato.getText());
             if (this.simulador.insertar(dato)) {                
                 this.inicializar(true);             
                 complementos();
@@ -201,35 +198,33 @@ public class Vistaa extends javax.swing.JFrame {
     }//GEN-LAST:event_botonInsertarActionPerformed
 
     private void InOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InOrdenActionPerformed
-        // TODO add your handling code here:
+        // llama el metodo in orden y lo guarda en un string y luego lo imprime
         String recorrido = null;
         recorrido = this.simulador.inOrden();
-        
         this.impresion.setText("");
         this.impresion.setText(recorrido);
     }//GEN-LAST:event_InOrdenActionPerformed
 
     private void PreOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreOrdenActionPerformed
-        // TODO add your handling code here:
+        // llama el metodo pre orden y lo guarda en un string y luego lo imprime
         String recorrido = null;
         recorrido = this.simulador.preOrden();
-        
         this.impresion.setText("");
         this.impresion.setText(recorrido);
     }//GEN-LAST:event_PreOrdenActionPerformed
 
     private void PostOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PostOrdenActionPerformed
-        // TODO add your handling code here:
+        // llama el metodo post orden y lo guarda en un string y luego lo imprime
         String recorrido = null;
         recorrido = this.simulador.postOrden();
-        
         this.impresion.setText("");
         this.impresion.setText(recorrido);
     }//GEN-LAST:event_PostOrdenActionPerformed
 
-    public void complementos(){
+    public void complementos(){//llama el metodo de pintar el arbol es decir actualizarlo
         this.repintarArbol();
     }
+    //metodo en donde obtienen el oanel y pinta los arboles
     private void repintarArbol() {
         this.jDesktopPane1.removeAll();
         Rectangle tamaño = this.jInternalFrame2.getBounds();
