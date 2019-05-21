@@ -16,72 +16,72 @@ public class ArbolBB {
     public ArbolBB() {
         ndRaiz = null;
     }
-    public int obtenerqe(Nodo r){//metodo recursivo para obtener el valor de fe
-        if(r==null){//si raiz es null, le quita uno
+    public int obtenerqe(Nodo ndRaiz){//metodo recursivo para obtener el valor de fe
+        if(ndRaiz==null){//si raiz es null, le quita uno
         return -1;
         }else{
-        return r.itFactroE;//de lo contraio envia el valor de factor de equilibiro
+        return ndRaiz.itFactroE;//de lo contraio envia el valor de factor de equilibiro
         } 
     }
     //rotacion izquierda
-    public Nodo rotaizq(Nodo r){
-    Nodo aux= r.ndIzq;//nuevo nodo apuntando a la rama izquierda
-    r.ndIzq=aux.itDer;
-    aux.itDer=r;
-    r.itFactroE=Math.max(obtenerqe(r.ndIzq), obtenerqe(r.itDer))+1;
+    public Nodo rotaizq(Nodo ndRaiz){
+    Nodo aux= ndRaiz.ndIzq;//nuevo nodo apuntando a la rama izquierda
+    ndRaiz.ndIzq=aux.itDer;
+    aux.itDer=ndRaiz;
+    ndRaiz.itFactroE=Math.max(obtenerqe(ndRaiz.ndIzq), obtenerqe(ndRaiz.itDer))+1;
     aux.itFactroE=Math.max(obtenerqe(aux.ndIzq),obtenerqe(aux.itDer))+1;
     return aux;
     }
     //rotacion hacia la derecha
-        public Nodo rotader(Nodo r){
-    Nodo aux= r.itDer;
-    r.itDer=aux.ndIzq;
-    aux.ndIzq=r;
-    r.itFactroE=Math.max(obtenerqe(r.ndIzq), obtenerqe(r.itDer))+1;
+        public Nodo rotader(Nodo ndRiaz){
+    Nodo aux= ndRiaz.itDer;
+    ndRiaz.itDer=aux.ndIzq;
+    aux.ndIzq=ndRiaz;
+    ndRiaz.itFactroE=Math.max(obtenerqe(ndRiaz.ndIzq), obtenerqe(ndRiaz.itDer))+1;
     aux.itFactroE=Math.max(obtenerqe(aux.ndIzq),obtenerqe(aux.itDer))+1;
     return aux;
     }
         //rotacion doble hacia la izquierda, que consta en hacer derecha y luego izq
-        public Nodo rotadobleizq(Nodo r){
+        public Nodo rotadobleizq(Nodo ndRiaz){
         Nodo aux;
-        r.ndIzq=rotader(r.ndIzq);
-        aux=rotaizq(r);
+        ndRiaz.ndIzq=rotader(ndRiaz.ndIzq);
+        aux=rotaizq(ndRiaz);
         return aux;
         }
         //rotar doble hacia la derecha
-        public Nodo rotadobleder(Nodo r){
+        public Nodo rotadobleder(Nodo ndRaiz){
         Nodo aux;//que consta de hacer izquierda y luego derechga
-        r.itDer=rotaizq(r.itDer);
-        aux=rotader(r);
+        ndRaiz.itDer=rotaizq(ndRaiz.itDer);
+        aux=rotader(ndRaiz);
         return aux;
         }
         //metodo para insertar nuevo, y equilibra el arbol
-        public Nodo insertaravl(Nodo nuevo, Nodo sub){
-        Nodo nuevop=sub;
-         if(nuevo.itDato<sub.itDato){//si el dato es menor al de raiz
-             if(sub.ndIzq==null){//si el de liquierda es null, lo mete alli
-             sub.ndIzq=nuevo;
+        public Nodo insertaravl(Nodo nsNuevo, Nodo ndpivot){
+        Nodo nuevop=ndpivot;
+         if(nsNuevo.itDato<ndpivot.itDato){//si el dato es menor al de raiz
+             if(ndpivot.ndIzq==null){//si el de liquierda es null, lo mete alli
+             ndpivot.ndIzq=nsNuevo;
              }else{//como no es null, se manda a llamar el metodo otra vez con la nueva raiz 
-             sub.ndIzq=insertaravl(nuevo, sub.ndIzq);//la nueva raiz, es el padre de izquierda
-            if(obtenerqe(sub.ndIzq)-obtenerqe(sub.itDer)==2){//para ver si tiene que hacer movimientos dobles
-            if(nuevo.itDato<sub.ndIzq.itDato){//si el nuevo dato fuera menor al de raiz
-                nuevop=rotaizq(sub);
+             ndpivot.ndIzq=insertaravl(nsNuevo, ndpivot.ndIzq);//la nueva raiz, es el padre de izquierda
+            if(obtenerqe(ndpivot.ndIzq)-obtenerqe(ndpivot.itDer)==2){//para ver si tiene que hacer movimientos dobles
+            if(nsNuevo.itDato<ndpivot.ndIzq.itDato){//si el nuevo dato fuera menor al de raiz
+                nuevop=rotaizq(ndpivot);
             }else{//si no es menor al de la raiz
-            nuevop=rotadobleizq(sub);
+            nuevop=rotadobleizq(ndpivot);
             }
             }
              }
-         }else if(nuevo.itDato>sub.itDato){//si el dato es mayor de raiz
-         if(sub.itDer==null){//si el de derecha es null, lo mete alli
-         sub.itDer=nuevo;
+         }else if(nsNuevo.itDato>ndpivot.itDato){//si el dato es mayor de raiz
+         if(ndpivot.itDer==null){//si el de derecha es null, lo mete alli
+         ndpivot.itDer=nsNuevo;
          }else{//como no es null, se manda a llamar el metodo otra vez con la nueva raiz 
-         sub.itDer=insertaravl(nuevo,sub.itDer);//ahora envia el dato con nueva raiz, padre derecho
-         if(obtenerqe(sub.itDer)-obtenerqe(sub.ndIzq)==2){//si fuera mayor a 1
+         ndpivot.itDer=insertaravl(nsNuevo,ndpivot.itDer);//ahora envia el dato con nueva raiz, padre derecho
+         if(obtenerqe(ndpivot.itDer)-obtenerqe(ndpivot.ndIzq)==2){//si fuera mayor a 1
             //se mira que movimiento debe de hacerce
-             if(nuevo.itDato>sub.itDer.itDato){
-             nuevop=rotader(sub);//movimiento derecha
+             if(nsNuevo.itDato>ndpivot.itDer.itDato){
+             nuevop=rotader(ndpivot);//movimiento derecha
              }else{//movimiento doble derecha
-             nuevop=rotadobleder(sub);
+             nuevop=rotadobleder(ndpivot);
              
              }
          }
@@ -90,17 +90,17 @@ public class ArbolBB {
          JOptionPane.showMessageDialog(null,"Nodo duplicado, no se puede colocar nodos duplicados");
          }
          //actualizando altura, aca se actializan los tamaños de altura de cada rama
-         if((sub.ndIzq==null)&&(sub.itDer!=null)){
-         sub.itFactroE=sub.itDer.itFactroE+1;
-         }else if((sub.itDer==null)&&(sub.ndIzq!=null)){
-            sub.itFactroE=sub.ndIzq.itFactroE+1;         
+         if((ndpivot.ndIzq==null)&&(ndpivot.itDer!=null)){
+         ndpivot.itFactroE=ndpivot.itDer.itFactroE+1;
+         }else if((ndpivot.itDer==null)&&(ndpivot.ndIzq!=null)){
+            ndpivot.itFactroE=ndpivot.ndIzq.itFactroE+1;         
          }else{
-         sub.itFactroE=Math.max(obtenerqe(sub.ndIzq),obtenerqe(sub.itDer))+1;         
+         ndpivot.itFactroE=Math.max(obtenerqe(ndpivot.ndIzq),obtenerqe(ndpivot.itDer))+1;         
          }
          return nuevop;
         }
-        public boolean insertar(int d){//metodo inicial para ingresar
-          Nodo nuevo= new Nodo(d,null,null);
+        public boolean insertar(int itDato){//metodo inicial para ingresar
+          Nodo nuevo= new Nodo(itDato,null,null);
         if(ndRaiz==null){//si no tiene nada, automaticamente se vuelve raiz
         ndRaiz=nuevo;
         }else{//de lo contrario se llama al metodo de ingreso que lo va a equilibrar tambien
@@ -165,12 +165,12 @@ public class ArbolBB {
     }
 
     //Metodo para verificar si hay un nodo en el arbol
-    public boolean existe(int dato) {
+    public boolean existe(int irDato) {
         Nodo aux = ndRaiz;
         while (aux != null) {
-            if (dato == aux.getDato()) {
+            if (irDato == aux.getDato()) {
                 return true;
-            } else if (dato > aux.getDato()) {
+            } else if (irDato > aux.getDato()) {
                 aux = aux.getDer();
             } else {
                 aux = aux.getIzq();
